@@ -1,11 +1,15 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 
-import 'widgets/caloric_intake_widget.dart';
-import 'widgets/meal_info_widget.dart';
+import '../../../../app_router/app_router.gr.dart';
+import '../../../../common/widgets/default_sliver_app_bar.dart';
+import '../widgets/caloric_intake_widget.dart';
+import '../widgets/meal_info_widget.dart';
 
+@RoutePage()
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -14,11 +18,9 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
+          DefaultSliverAppBar(
             leading: Bounceable(
-              onTap: () {
-                log('Navigate to add screen');
-              },
+              onTap: () => context.pushRoute(const AddMealRoute()),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
@@ -31,7 +33,16 @@ class MainScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return MealInfoWidget(index: index);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
+                  child: MealInfoWidget(
+                    title: 'Meal $index',
+                    index: index,
+                  ),
+                );
               },
               childCount: 10,
             ),

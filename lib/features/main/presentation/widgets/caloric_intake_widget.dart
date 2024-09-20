@@ -5,6 +5,10 @@ class CaloricIntakeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Caloric Intake Widget'));
+    return const Center(
+      child: Text(
+        'Caloric Intake Widget',
+      ),
+    );
   }
 }

@@ -5,7 +5,6 @@ import 'features/main/domain/ingredient_entity.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await IngredientProvider().getData(10, 10);
   runApp(const MyApp());
 }
 

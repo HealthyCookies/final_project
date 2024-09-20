@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../services/database/database_service.dart';
-import '../../../services/database/i_database_service.dart';
+import '../domain/i_database_service.dart';
 import '../domain/ingredient_entity.dart';
 
 const String _tableName = 'ingredient_table';

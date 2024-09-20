@@ -21,6 +21,7 @@ class DefaultTextFormFiled extends StatelessWidget {
       onChanged: onChanged,
       keyboardType: inputType,
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: labelText,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
         enabledBorder: const OutlineInputBorder(

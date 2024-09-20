@@ -10,6 +10,10 @@ class AppRouter extends RootStackRouter {
       ];
 
   List<AutoRoute> get _mainScreenRoutes => <AutoRoute>[
-        AutoRoute(page: MainRoute.page, initial: true),
+        AutoRoute(
+          page: MainRoute.page,
+          initial: true,
+        ),
+        AutoRoute(page: AddMealRoute.page),
       ];
 }

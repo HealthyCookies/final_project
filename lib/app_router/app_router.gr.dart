@@ -8,14 +8,35 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:final_project/features/main/presentation/main_screen.dart'
+import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:final_project/features/main/presentation/screens/add_meal_screen.dart'
     as _i1;
+import 'package:final_project/features/main/presentation/screens/main_screen.dart'
+    as _i2;
 
 /// generated route for
-/// [_i1.MainScreen]
-class MainRoute extends _i2.PageRouteInfo<void> {
-  const MainRoute({List<_i2.PageRouteInfo>? children})
+/// [_i1.AddMealScreen]
+class AddMealRoute extends _i3.PageRouteInfo<void> {
+  const AddMealRoute({List<_i3.PageRouteInfo>? children})
+      : super(
+          AddMealRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddMealRoute';
+
+  static _i3.PageInfo page = _i3.PageInfo(
+    name,
+    builder: (data) {
+      return const _i1.AddMealScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i2.MainScreen]
+class MainRoute extends _i3.PageRouteInfo<void> {
+  const MainRoute({List<_i3.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           initialChildren: children,
@@ -23,10 +44,10 @@ class MainRoute extends _i2.PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static _i2.PageInfo page = _i2.PageInfo(
+  static _i3.PageInfo page = _i3.PageInfo(
     name,
     builder: (data) {
-      return const _i1.MainScreen();
+      return const _i2.MainScreen();
     },
   );
 }

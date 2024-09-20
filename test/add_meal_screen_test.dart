@@ -2,9 +2,6 @@ import 'package:final_project/common/widgets/default_text_form_filed.dart';
 import 'package:final_project/features/main/presentation/screens/add_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group(

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 
 import '../../../../app_router/app_router.gr.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
+import '../../../../themes/theme_provider.dart';
 import '../widgets/caloric_intake_widget.dart';
 import '../widgets/meal_info_widget.dart';
 
@@ -15,6 +15,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider? themeProvider = ThemeProvider.of(context);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -28,6 +30,19 @@ class MainScreen extends StatelessWidget {
                 child: const Icon(Icons.add_rounded),
               ),
             ),
+            // Add actions to the AppBar
+            actions: [
+              IconButton(
+                icon: Icon(
+                  themeProvider?.themeMode == ThemeMode.dark
+                      ? Icons.wb_sunny
+                      : Icons.nightlight_round,
+                ),
+                onPressed: () {
+                  themeProvider?.toggleTheme();
+                },
+              ),
+            ],
           ),
           const SliverToBoxAdapter(child: CaloricIntakeWidget()),
           SliverList(

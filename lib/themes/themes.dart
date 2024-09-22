@@ -16,42 +16,37 @@ class AppColors {
   static const Color textColorDark = Color(0xFFFCFDF8);
 }
 
-class AppThemes {
-  AppThemes()
-      : lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: AppColors.mainGreen,
-    colorScheme: const ColorScheme.light(
-      primary: AppColors.mainGreen,
-      secondary: AppColors.secondaryGreen,
-      onPrimary: AppColors.textColorLight,
-    ),
-    scaffoldBackgroundColor: AppColors.mainWhite,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.appBarBackgroundLight,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: AppColors.textColorLight),
-    ),
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: AppColors.mainGreen,
+  colorScheme: const ColorScheme.light(
+    primary: AppColors.mainGreen,
+    secondary: AppColors.secondaryGreen,
+    onPrimary: AppColors.textColorLight,
   ),
-        darkTheme = ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: AppColors.primaryColorDark,
-          colorScheme: const ColorScheme.dark(
-            primary: AppColors.primaryColorDark,
-            secondary: AppColors.secondaryColorDark,
-            surface: AppColors.scaffoldBackgroundDark,
-            onPrimary: AppColors.textColorDark,
-          ),
-          scaffoldBackgroundColor: AppColors.scaffoldBackgroundDark,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: AppColors.appBarBackgroundDark,
-          ),
-          textTheme: const TextTheme(
-            bodyLarge: TextStyle(color: AppColors.textColorDark),
-          ),
-        );
+  scaffoldBackgroundColor: AppColors.mainWhite,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.appBarBackgroundLight,
+  ),
+  textTheme: const TextTheme(
+    bodyLarge: TextStyle(color: AppColors.textColorLight),
+  ),
+);
 
-  final ThemeData lightTheme;
-  final ThemeData darkTheme;
-}
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: AppColors.primaryColorDark,
+  colorScheme: const ColorScheme.dark(
+    primary: AppColors.primaryColorDark,
+    secondary: AppColors.secondaryColorDark,
+    surface: AppColors.scaffoldBackgroundDark,
+    onPrimary: AppColors.textColorDark,
+  ),
+  scaffoldBackgroundColor: AppColors.scaffoldBackgroundDark,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.appBarBackgroundDark,
+  ),
+  textTheme: const TextTheme(
+    bodyLarge: TextStyle(color: AppColors.textColorDark),
+  ),
+);

@@ -39,7 +39,7 @@ class MainScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const SliverToBoxAdapter(child: CaloricIntakeWidget()),
+          const SliverToBoxAdapter(child: CaloricIntakeWidget(goalCalories: 1800, currentCalories: 1300)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

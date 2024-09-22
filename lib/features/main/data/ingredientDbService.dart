@@ -4,12 +4,12 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../services/database/database_service.dart';
 import '../domain/i_database_service.dart';
-import '../domain/ingredient_entity.dart';
+import '../domain/models/ingredient.dart';
 
 const String _tableName = 'ingredient_table';
 
 class IngredientDbService extends DatabaseService
-    implements IDatabaseService<IngredientEntity> {
+    implements IDatabaseService<Ingredient> {
   IngredientDbService();
 
   @override
@@ -27,13 +27,13 @@ class IngredientDbService extends DatabaseService
   String get tableName => '$_tableName.db';
 
   @override
-  Future<void> deleteData(List<IngredientEntity> data) async {
+  Future<void> deleteData(List<Ingredient> data) async {
     // TODO: implement deleteData
     throw UnimplementedError();
   }
 
   @override
-  Future<List<IngredientEntity>> getData(int limit, int offset) async {
+  Future<List<Ingredient>> getData(int limit, int offset) async {
     (await super.database).rawQuery(
       '''
         SELECT * FROM $_tableName
@@ -44,13 +44,13 @@ class IngredientDbService extends DatabaseService
   }
 
   @override
-  Future<void> insertData(List<IngredientEntity> data) async {
+  Future<void> insertData(List<Ingredient> data) async {
     // TODO: implement insertData
     throw UnimplementedError();
   }
 
   @override
-  Future<void> updateData(List<IngredientEntity> data) async {
+  Future<void> updateData(List<Ingredient> data) async {
     // TODO: implement updateData
     throw UnimplementedError();
   }

@@ -8,9 +8,9 @@ import '../domain/ingredient_entity.dart';
 
 const String _tableName = 'ingredient_table';
 
-class IngredientProvider extends DatabaseService
+class IngredientDbService extends DatabaseService
     implements IDatabaseService<IngredientEntity> {
-  IngredientProvider();
+  IngredientDbService();
 
   @override
   FutureOr<void> Function(Database database, int version) get onCreate =>

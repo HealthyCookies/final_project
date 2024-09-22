@@ -1,9 +1,14 @@
+import 'package:uuid/uuid.dart';
+
 class IngredientEntity {
   IngredientEntity({
-    required this.id,
     required this.name,
-  });
+  }) id = _generateId();
 
-  final int id;
   final String name;
+
+  static String _generateId() {
+    const Uuid uuid = Uuid();
+    return uuid.v4();
+  }
 }

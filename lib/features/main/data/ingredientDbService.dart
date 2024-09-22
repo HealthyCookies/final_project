@@ -16,11 +16,11 @@ class IngredientDbService extends DatabaseService
   FutureOr<void> Function(Database database, int version) get onCreate =>
       (Database database, int version) {
         database.execute('''
-            CREATE TABLE IF NOT EXISTS $_tableName(
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name TEXT NOT NULL
+          CREATE TABLE IF NOT EXISTS $_tableName(
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL
           )
-          ''');
+        ''');
       };
 
   @override
@@ -28,30 +28,55 @@ class IngredientDbService extends DatabaseService
 
   @override
   Future<void> deleteData(List<Ingredient> data) async {
-    // TODO: implement deleteData
-    throw UnimplementedError();
+    final db = await super.database;
+    final batch = db.batch();
+    for (final ingredient in data) {
+      batch.delete(
+        _tableName,
+        where: 'id = ?',
+        whereArgs: [ingredient.id],
+      );
+    }
+    await batch.commit(noResult: true);
   }
 
   @override
   Future<List<Ingredient>> getData(int limit, int offset) async {
-    (await super.database).rawQuery(
-      '''
-        SELECT * FROM $_tableName
-      '''
+    final db = await super.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      _tableName,
+      limit: limit,
+      offset: offset,
     );
-    // process and return data as List<IngredientEntity>
-    throw UnimplementedError();
+    return maps.map((map) => Ingredient.fromMap(map)).toList();
   }
 
   @override
   Future<void> insertData(List<Ingredient> data) async {
-    // TODO: implement insertData
-    throw UnimplementedError();
+    final db = await super.database;
+    final batch = db.batch();
+    for (final ingredient in data) {
+      batch.insert(
+        _tableName,
+        ingredient.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+    await batch.commit(noResult: true);
   }
 
   @override
   Future<void> updateData(List<Ingredient> data) async {
-    // TODO: implement updateData
-    throw UnimplementedError();
+    final db = await super.database;
+    final batch = db.batch();
+    for (final ingredient in data) {
+      batch.update(
+        _tableName,
+        ingredient.toMap(),
+        where: 'id = ?',
+        whereArgs: [ingredient.id],
+      );
+    }
+    await batch.commit(noResult: true);
   }
 }

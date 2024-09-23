@@ -9,16 +9,15 @@ import '../features/main/domain/models/food.dart';
 import '../features/main/domain/models/ingredient.dart';
 import '../features/main/domain/models/meal.dart';
 
-
 class FirstLaunchUseCase {
-
   FirstLaunchUseCase(
-      this._prefs,
-      this._activityDbService,
-      this._foodDbService,
-      this._ingredientDbService,
-      this._mealDbService,
-      );
+    this._prefs,
+    this._activityDbService,
+    this._foodDbService,
+    this._ingredientDbService,
+    this._mealDbService,
+  );
+
   final SharedPreferences _prefs;
   final ActivityDbService _activityDbService;
   final FoodDbService _foodDbService;
@@ -50,14 +49,30 @@ class FirstLaunchUseCase {
 
     final List<Food> foods = [
       Food(name: 'Apple', calories: 95.0, carbs: 25.0, protein: 0.5, fat: 0.3),
-      Food(name: 'Banana', calories: 105.0, carbs: 27.0, protein: 1.3, fat: 0.3),
-      Food(name: 'Chicken Breast', calories: 165.0, carbs: 0.0, protein: 31.0, fat: 3.6),
-      Food(name: 'Broccoli', calories: 55.0, carbs: 11.2, protein: 3.7, fat: 0.6),
+      Food(
+          name: 'Banana', calories: 105.0, carbs: 27.0, protein: 1.3, fat: 0.3),
+      Food(
+          name: 'Chicken Breast',
+          calories: 165.0,
+          carbs: 0.0,
+          protein: 31.0,
+          fat: 3.6),
+      Food(
+          name: 'Broccoli',
+          calories: 55.0,
+          carbs: 11.2,
+          protein: 3.7,
+          fat: 0.6),
       Food(name: 'Rice', calories: 206.0, carbs: 45.0, protein: 4.3, fat: 0.4),
       Food(name: 'Egg', calories: 68.0, carbs: 0.6, protein: 5.5, fat: 4.8),
       Food(name: 'Oats', calories: 68.0, carbs: 12.0, protein: 2.5, fat: 1.4),
       Food(name: 'Yogurt', calories: 59.0, carbs: 3.6, protein: 10.0, fat: 0.4),
-      Food(name: 'Almonds', calories: 576.0, carbs: 21.6, protein: 21.2, fat: 50.0),
+      Food(
+          name: 'Almonds',
+          calories: 576.0,
+          carbs: 21.6,
+          protein: 21.2,
+          fat: 50.0),
       Food(name: 'Spinach', calories: 23.0, carbs: 3.6, protein: 2.9, fat: 0.4),
     ];
 
@@ -89,7 +104,11 @@ class FirstLaunchUseCase {
         carbs: 70.0,
         protein: 35.0,
         fat: 20.0,
-        foods: <String, double>{'Chicken Breast': 200, 'Broccoli': 100, 'Rice': 150},
+        foods: <String, double>{
+          'Chicken Breast': 200,
+          'Broccoli': 100,
+          'Rice': 150
+        },
       ),
       Meal(
         name: 'Salmon with spinach and rice',
@@ -153,7 +172,11 @@ class FirstLaunchUseCase {
         carbs: 65.0,
         protein: 25.0,
         fat: 15.0,
-        foods: <String, double>{'Tortilla': 100, 'Chicken Breast': 150, 'Lettuce': 50},
+        foods: <String, double>{
+          'Tortilla': 100,
+          'Chicken Breast': 150,
+          'Lettuce': 50
+        },
       ),
     ];
 

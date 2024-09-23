@@ -9,8 +9,16 @@ import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../common/widgets/default_text_form_filed.dart';
 
 @RoutePage()
-class AddMealScreen extends StatelessWidget {
+class AddMealScreen extends StatefulWidget {
   const AddMealScreen({super.key});
+
+  @override
+  AddMealScreenState createState() => AddMealScreenState();
+}
+
+class AddMealScreenState extends State<AddMealScreen> {
+  String? selectedMealType;
+  final List<String> mealTypes = <String>['Breakfast', 'Lunch', 'Dinner'];
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +37,52 @@ class AddMealScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32.0),
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Input the dish name, its type (Breakfast, Lunch, Dinner) and Calories',
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 40.0),
-                  DefaultTextFormFiled(
+                  const SizedBox(height: 40.0),
+                  const DefaultTextFormFiled(
                     labelText: 'Name',
                   ),
-                  SizedBox(height: 40.0),
-                  DefaultTextFormFiled(),
-                  SizedBox(height: 40.0),
-                  DefaultTextFormFiled(
+                  const SizedBox(height: 40.0),
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelText: 'Type',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25.0),
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25.0),
+                        ),
+                      ),
+                    ),
+                    value: selectedMealType,
+                    items: mealTypes
+                        .map((String type) => DropdownMenuItem<String>(
+                      value: type,
+                      child: Text(type),
+                    ))
+                        .toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedMealType = value;  });
+                    },
+                  ),
+                  const SizedBox(height: 40.0),
+                  const DefaultTextFormFiled(
+                    labelText: 'Kilocalories',
                     inputType: TextInputType.number,
                   ),
                 ],
@@ -68,3 +105,5 @@ class AddMealScreen extends StatelessWidget {
     );
   }
 }
+
+

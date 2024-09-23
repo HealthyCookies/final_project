@@ -4,21 +4,25 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../services/database/database_service.dart';
 import '../domain/i_database_service.dart';
-import '../domain/models/ingredient.dart';
+import '../domain/models/meal.dart';
 
-const String _tableName = 'ingredient_table';
+const String _tableName = 'meal_table';
 
-class IngredientDbService extends DatabaseService
-    implements IDatabaseService<Ingredient> {
-  IngredientDbService();
+class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
+  MealDbService();
 
   @override
   FutureOr<void> Function(Database database, int version) get onCreate =>
       (Database database, int version) {
         database.execute('''
           CREATE TABLE IF NOT EXISTS $_tableName(
-            id TяEXT PRIMARY KEY,
-            name TEXT NOT NULL
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            calories REAL NOT NULL,
+            carbs REAL,
+            protein REAL,
+            fat REAL,
+            foods TEXT
           )
         ''');
       };
@@ -27,38 +31,38 @@ class IngredientDbService extends DatabaseService
   String get tableName => '$_tableName.db';
 
   @override
-  Future<void> deleteData(List<Ingredient> data) async {
+  Future<void> deleteData(List<Meal> data) async {
     final db = await super.database;
     final batch = db.batch();
-    for (final ingredient in data) {
+    for (final meal in data) {
       batch.delete(
         _tableName,
         where: 'id = ?',
-        whereArgs: [ingredient.id],
+        whereArgs: [meal.id],
       );
     }
     await batch.commit(noResult: true);
   }
 
   @override
-  Future<List<Ingredient>> getData(int limit, int offset) async {
+  Future<List<Meal>> getData(int limit, int offset) async {
     final db = await super.database;
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       limit: limit,
       offset: offset,
     );
-    return maps.map((map) => Ingredient.fromMap(map)).toList();
+    return maps.map((map) => Meal.fromMap(map)).toList();
   }
 
   @override
-  Future<void> insertData(List<Ingredient> data) async {
+  Future<void> insertData(List<Meal> data) async {
     final db = await super.database;
     final batch = db.batch();
-    for (final ingredient in data) {
+    for (final meal in data) {
       batch.insert(
         _tableName,
-        ingredient.toMap(),
+        meal.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
@@ -66,15 +70,15 @@ class IngredientDbService extends DatabaseService
   }
 
   @override
-  Future<void> updateData(List<Ingredient> data) async {
+  Future<void> updateData(List<Meal> data) async {
     final db = await super.database;
     final batch = db.batch();
-    for (final ingredient in data) {
+    for (final meal in data) {
       batch.update(
         _tableName,
-        ingredient.toMap(),
+        meal.toMap(),
         where: 'id = ?',
-        whereArgs: [ingredient.id],
+        whereArgs: [meal.id],
       );
     }
     await batch.commit(noResult: true);

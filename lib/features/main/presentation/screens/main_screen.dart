@@ -31,7 +31,7 @@ class MainScreen extends ConsumerWidget {
             actions: <Widget>[
               IconButton(
                 icon: Icon(
-                  ref.read(themeProvider) == ThemeMode.dark
+                  ref.watch(themeProvider) == ThemeMode.dark
                       ? Icons.wb_sunny
                       : Icons.nightlight_round,
                 ),

@@ -1,41 +1,51 @@
 import 'package:uuid/uuid.dart';
 
-/// Represents an individual food item with its nutritional values.
 class Food {
-  /// Creates a [Food] with a given [name], [calories], and optional
-  /// nutritional values like [carbs], [protein], and [fat].
-  ///
-  /// [carbs], [protein], and [fat] default to 0 if not provided.
-  /// The [id] is automatically generated using UUID.
+  final String id;
+
+  final String name;
+
+  final double calories;
+
+  double carbs;
+
+  double protein;
+
+  double fat;
+
   Food({
+    String? id,
     required this.name,
     required this.calories,
     this.carbs = 0.0,
     this.protein = 0.0,
     this.fat = 0.0,
-  }) : id = _generateId();
+  }) : id = id ?? _generateId();
 
-  /// The generated UUID for the food item.
-  final String id;
-
-  /// The name of the food (e.g. 'Apple').
-  final String name;
-
-  /// The total calories in the food item.
-  final double calories;
-
-  /// The amount of carbohydrates in the food item, in grams.
-  double carbs;
-
-  /// The amount of protein in the food item, in grams.
-  double protein;
-
-  /// The amount of fat in the food item, in grams.
-  double fat;
-
-  /// Static function to generate UUIDs.
   static String _generateId() {
     const Uuid uuid = Uuid();
     return uuid.v4();
+  }
+
+  factory Food.fromMap(Map<String, dynamic> map) {
+    return Food(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      calories: map['calories'] as double,
+      carbs: map['carbs'] as double? ?? 0.0,
+      protein: map['protein'] as double? ?? 0.0,
+      fat: map['fat'] as double? ?? 0.0,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'calories': calories,
+      'carbs': carbs,
+      'protein': protein,
+      'fat': fat,
+    };
   }
 }

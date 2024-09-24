@@ -47,16 +47,11 @@ class FirstLaunchUseCase {
       Activity(name: 'Rowing', caloriesBurned: 350.0),
     ];
 
-    final List<Food> foods = [
+    final List<Food> foods = <Food>[
       Food(name: 'Apple', calories: 95.0, carbs: 25.0, protein: 0.5, fat: 0.3),
       Food(
           name: 'Banana', calories: 105.0, carbs: 27.0, protein: 1.3, fat: 0.3),
-      Food(
-          name: 'Chicken Breast',
-          calories: 165.0,
-          carbs: 0.0,
-          protein: 31.0,
-          fat: 3.6),
+      Food(name: 'Chicken Breast', calories: 165.0, protein: 31.0, fat: 3.6),
       Food(
           name: 'Broccoli',
           calories: 55.0,
@@ -68,15 +63,16 @@ class FirstLaunchUseCase {
       Food(name: 'Oats', calories: 68.0, carbs: 12.0, protein: 2.5, fat: 1.4),
       Food(name: 'Yogurt', calories: 59.0, carbs: 3.6, protein: 10.0, fat: 0.4),
       Food(
-          name: 'Almonds',
-          calories: 576.0,
-          carbs: 21.6,
-          protein: 21.2,
-          fat: 50.0),
+        name: 'Almonds',
+        calories: 576.0,
+        carbs: 21.6,
+        protein: 21.2,
+        fat: 50.0,
+      ),
       Food(name: 'Spinach', calories: 23.0, carbs: 3.6, protein: 2.9, fat: 0.4),
     ];
 
-    final List<Ingredient> ingredients = [
+    final List<Ingredient> ingredients = <Ingredient>[
       Ingredient(name: 'Salt'),
       Ingredient(name: 'Pepper'),
       Ingredient(name: 'Garlic'),
@@ -89,7 +85,7 @@ class FirstLaunchUseCase {
       Ingredient(name: 'Paprika'),
     ];
 
-    final List<Meal> meals = [
+    final List<Meal> meals = <Meal>[
       Meal(
         name: 'Fruit Breakfast',
         calories: 300.0,

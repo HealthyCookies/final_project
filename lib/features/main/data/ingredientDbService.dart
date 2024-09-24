@@ -6,7 +6,7 @@ import '../../../services/database/database_service.dart';
 import '../domain/i_database_service.dart';
 import '../domain/models/ingredient.dart';
 
-const String _tableName = 'ingredient_table';
+const String _tableName = 'ingredient_table_db';
 
 class IngredientDbService extends DatabaseService
     implements IDatabaseService<Ingredient> {
@@ -17,7 +17,7 @@ class IngredientDbService extends DatabaseService
       (Database database, int version) {
         database.execute('''
           CREATE TABLE IF NOT EXISTS $_tableName(
-            id TяEXT PRIMARY KEY,
+            id TEXT PRIMARY KEY,
             name TEXT NOT NULL
           )
         ''');

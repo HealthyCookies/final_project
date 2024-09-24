@@ -2,7 +2,6 @@ import 'package:uuid/uuid.dart';
 
 class Ingredient {
   final String id;
-
   final String name;
 
   Ingredient({

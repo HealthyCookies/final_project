@@ -1,0 +1,10 @@
+{
+  "appTitle": "HealthyCookie",
+  "@appTitle": {
+    "description": "AppBar title"
+  },
+  "pushCount": "You have pushed the button this many times:",
+  "@pushCount": {
+    "description": "How many times the button has been pushed"
+  }
+}

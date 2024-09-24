@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../services/database/database_service.dart';
@@ -7,6 +8,9 @@ import '../domain/i_database_service.dart';
 import '../domain/models/meal.dart';
 
 const String _tableName = 'meal_table';
+
+// ignore: always_specify_types
+final mealDbServiceProvider = Provider((_) => MealDbService());
 
 class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
   MealDbService();

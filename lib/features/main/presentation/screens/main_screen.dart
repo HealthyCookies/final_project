@@ -64,34 +64,3 @@ class MainScreen extends ConsumerWidget {
     );
   }
 }
-
-@RoutePage()
-class TabsRouterScreen extends StatelessWidget {
-  const TabsRouterScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: const <PageRouteInfo>[
-        MainRoute(),
-        AllMealsRoute(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
-          currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              label: 'Main',
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Meals',
-              icon: Icon(Icons.list_rounded),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}

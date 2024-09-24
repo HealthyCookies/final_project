@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/s.dart';
 
 class CaloricIntakePainter extends CustomPainter {
 
   CaloricIntakePainter({
     required this.progress,
     required this.remainingCalories,
+    required this.localization,
+
   });
   final double progress;
   final int remainingCalories;
+  final AppLocalizations localization;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -60,9 +65,9 @@ class CaloricIntakePainter extends CustomPainter {
 
     // Draw the "KCAL LEFT" text (smaller)
     final TextPainter textPainterKcalLeft = TextPainter(
-      text: const TextSpan(
-        text: 'KCAL LEFT',
-        style: TextStyle(
+      text: TextSpan(
+        text: localization.caloricIntakeKcal,
+        style: const TextStyle(
           fontSize: 15, // Smaller font size for the text
           fontWeight: FontWeight.w500,
           color: Colors.black,
@@ -108,6 +113,7 @@ class CaloricIntakeWidget extends StatelessWidget {
         painter: CaloricIntakePainter(
           progress: progress.clamp(0.0, 1.0),
           remainingCalories: remainingCalories,
+          localization: S.of(context),
         ),
       ),
     );

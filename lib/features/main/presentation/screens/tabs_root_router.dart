@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app_router/app_router.gr.dart';
+import '../../../l10n/s.dart';
 
 @RoutePage()
 class TabsRouterScreen extends StatelessWidget {
@@ -19,14 +20,14 @@ class TabsRouterScreen extends StatelessWidget {
         return BottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              label: 'Main',
-              icon: Icon(Icons.home),
+              label: S.of(context).mainMenuButton,
+              icon: const Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              label: 'Meals',
-              icon: Icon(Icons.list_rounded),
+              label: S.of(context).mainMealsButton,
+              icon: const Icon(Icons.list_rounded),
             ),
           ],
         );

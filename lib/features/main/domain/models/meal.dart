@@ -1,47 +1,86 @@
 import 'package:uuid/uuid.dart';
 
-/// Represents a meal with its nutritional values and a list of foods.
-/// The [id] is automatically generated using UUID.
 class Meal {
-  /// Creates a [Meal] with a given [name], [calories], and optional
-  /// nutritional values like [carbs], [protein], [fat], and a list of [foods].
-  ///
-  /// [carbs], [protein], and [fat] default to 0 if not provided. [foods] is an
-  /// optional map containing food names and their respective weights in grams.
   Meal({
+    String? id,
     required this.name,
     required this.calories,
     this.carbs = 0.0,
     this.protein = 0.0,
     this.fat = 0.0,
     this.foods = const <String, double>{},
-  }) : id = _generateId();
+  }) : id = id ?? _generateId();
 
-  /// The generated UUID for the meal item.
   final String id;
-
-  /// The name of the meal (e.g. 'Breakfast').
   final String name;
-
-  /// The total calories in the meal.
   final double calories;
-
-  /// The amount of carbohydrates in the meal, in grams.
   double carbs;
-
-  /// The amount of protein in the meal, in grams.
   double protein;
-
-  /// The amount of fat in the meal, in grams.
   double fat;
-
-  /// A map of foods included in the meal, with the key as the food name
-  /// and the value as its weight in grams (e.g. {'Apple': 100.0}).
   final Map<String, double> foods;
 
-  /// Static function to generate UUIDs.
+  factory Meal.fromMap(Map<String, dynamic> map) {
+    return Meal(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      calories: map['calories'] as double,
+      carbs: map['carbs'] as double? ?? 0.0,
+      protein: map['protein'] as double? ?? 0.0,
+      fat: map['fat'] as double? ?? 0.0,
+      foods: parseMealData(map['foods']),
+    );
+  }
+
   static String _generateId() {
     const Uuid uuid = Uuid();
     return uuid.v4();
+  }
+  
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'calories': calories,
+      'carbs': carbs,
+      'protein': protein,
+      'fat': fat,
+      'foods': foods,
+    };
+  }
+
+  static Map<String, double> parseMealData(String data) {
+    if (data.startsWith('{') && data.endsWith('}')) {
+      final String innerData = data.substring(1, data.length - 1);
+
+      if (innerData.trim().isEmpty) {
+        return <String, double>{};
+      }
+
+      final List<String> pairs = innerData.split(',');
+      final Map<String, double> result = <String, double>{};
+
+      for (final String pair in pairs) {
+        final List<String> keyValue = pair.split('=');
+
+        if (keyValue.length != 2) {
+          throw FormatException('Invalid key-value pair: "$pair"');
+        }
+
+        final String key = keyValue[0].trim();
+        final String valueStr = keyValue[1].trim();
+
+        final double? value = double.tryParse(valueStr);
+        if (value == null) {
+          throw FormatException('Invalid number format for value: "$valueStr"');
+        }
+
+        result[key] = value;
+      }
+
+      return result;
+    } else {
+      throw const FormatException(
+          'String must start with "{" and end with "}"');
+    }
   }
 }

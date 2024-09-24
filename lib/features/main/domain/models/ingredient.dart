@@ -1,16 +1,12 @@
 import 'package:uuid/uuid.dart';
 
-class Activity {
+class Ingredient {
   final String id;
-
   final String name;
 
-  final double caloriesBurned;
-
-  Activity({
+  Ingredient({
     String? id,
     required this.name,
-    required this.caloriesBurned,
   }) : id = id ?? _generateId();
 
   static String _generateId() {
@@ -18,11 +14,10 @@ class Activity {
     return uuid.v4();
   }
 
-  factory Activity.fromMap(Map<String, dynamic> map) {
-    return Activity(
+  factory Ingredient.fromMap(Map<String, dynamic> map) {
+    return Ingredient(
       id: map['id'] as String,
       name: map['name'] as String,
-      caloriesBurned: (map['caloriesBurned'] as num).toDouble(),
     );
   }
 
@@ -30,7 +25,6 @@ class Activity {
     return {
       'id': id,
       'name': name,
-      'caloriesBurned': caloriesBurned,
     };
   }
 }

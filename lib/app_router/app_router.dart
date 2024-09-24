@@ -6,14 +6,30 @@ import 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => <AutoRoute>[
-        ..._mainScreenRoutes,
+        AutoRoute(
+          page: TabsRouterRoute.page,
+          initial: true,
+          children: <AutoRoute>[
+            ..._mainScreenRoutes,
+            ..._mealsListRoutes,
+          ],
+        ),
       ];
 
   List<AutoRoute> get _mainScreenRoutes => <AutoRoute>[
         AutoRoute(
-          page: MainRoute.page,
+          page: MainRootRoute.page,
           initial: true,
+          children: <AutoRoute>[
+            AutoRoute(page: MainRoute.page, initial: true),
+            AutoRoute(page: AddMealRoute.page),
+          ],
         ),
-        AutoRoute(page: AddMealRoute.page),
+      ];
+
+  List<AutoRoute> get _mealsListRoutes => <AutoRoute>[
+        AutoRoute(
+          page: AllMealsRoute.page,
+        ),
       ];
 }

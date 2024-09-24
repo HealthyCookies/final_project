@@ -17,7 +17,7 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
 
   @override
   FutureOr<void> Function(Database database, int version) get onCreate =>
-      (Database database, int version) {
+          (Database database, int version) {
         database.execute('''
           CREATE TABLE IF NOT EXISTS $_tableName(
             id TEXT PRIMARY KEY,
@@ -49,12 +49,23 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
   }
 
   @override
-  Future<List<Meal>> getData(int limit, int offset) async {
+  Future<List<Meal>> getData(int limit, int offset, {String? name}) async {
     final db = await super.database;
+
+    String? where;
+    List<dynamic>? whereArgs;
+
+    if (name != null && name.isNotEmpty) {
+      where = 'name LIKE ?';
+      whereArgs = ['%$name%'];
+    }
+
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       limit: limit,
       offset: offset,
+      where: where,
+      whereArgs: whereArgs,
     );
     return maps.map((map) => Meal.fromMap(map)).toList();
   }

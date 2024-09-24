@@ -5,5 +5,5 @@ abstract interface class IDatabaseService<T> {
 
   Future<void> deleteData(List<T> data);
 
-  Future<List<T>> getData(int limit, int offset);
+  Future<List<T>> getData(int limit, int offset, {String? name});
 }

@@ -12,6 +12,8 @@ analyzer:
     sort_constructors_first: ignore
     use_super_parameters: ignore
     unused_import: ignore
+    prefer_final_in_for_each: ignore
+    prefer_relative_imports: ignore
 
 linter:
   rules:

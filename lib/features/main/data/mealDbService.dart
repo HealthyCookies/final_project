@@ -51,13 +51,17 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
   }
 
   @override
-  Future<List<Meal>> getData(int limit, int offset, {String? name}) async {
+  Future<List<Meal>> getData(int limit, int offset,
+      {String? name, String? id}) async {
     final db = await super.database;
 
     String? where;
     List<dynamic>? whereArgs;
 
-    if (name != null && name.isNotEmpty) {
+    if (id != null && id.isNotEmpty) {
+      where = 'id = ?';
+      whereArgs = [id];
+    } else if (name != null && name.isNotEmpty) {
       where = 'name LIKE ?';
       whereArgs = ['%$name%'];
     }

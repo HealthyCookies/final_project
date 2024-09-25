@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../common/helpers/no_params.dart';
-import '../../../../domain/use_cases/load_daily_info.dart';
+import '../../../../domain/use_cases/get_daily_stats.dart';
+import '../../../../domain/use_cases/update_daily_stat.dart';
 import '../../../../domain/use_cases/use_case.dart';
 import '../../data/mealDbService.dart';
 import '../../domain/models/meal.dart';
@@ -35,9 +36,11 @@ class DailyInfoState with _$DailyInfoState {
 }
 
 class MealsStateNotifier extends StateNotifier<DailyInfoState> {
-  MealsStateNotifier(this._dailyInfoUseCase) : super(DailyInfoState.initial());
+  MealsStateNotifier(this._dailyInfoUseCase, this._updateDailyStatsUseCase)
+      : super(DailyInfoState.initial());
 
   final UseCase<Future<List<Meal>>, NoParams> _dailyInfoUseCase;
+  final UseCase<Future<void>, Meal> _updateDailyStatsUseCase;
 
   Future<void> refreshInfo() async {
     state = DailyInfoState.loading();
@@ -47,12 +50,20 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
 
   Future<void> addDailyInfo(BuildContext context) async {
     final Meal? mealToAdd = await showAddDailyMealDialog(context);
-    print(mealToAdd);
+    if (mealToAdd != null) {
+      await _updateDailyStatsUseCase.execute(mealToAdd);
+      refreshInfo();
+    } else {
+      // show warning
+    }
   }
 }
 
 // ignore: always_specify_types
 final dailyInfoStateNotifierProvider = StateNotifierProvider(
   (StateNotifierProviderRef<MealsStateNotifier, DailyInfoState> ref) =>
-      MealsStateNotifier(LoadDailyInfo(ref.read(mealDbServiceProvider))),
+      MealsStateNotifier(
+    ref.read(getDailyStatsProvider),
+    ref.read(updateDailyStatProvider),
+  ),
 );

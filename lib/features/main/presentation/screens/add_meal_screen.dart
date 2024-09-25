@@ -29,13 +29,13 @@ class AddMealScreen extends ConsumerWidget {
         child: Column(
           children: <Widget>[
             const SizedBox(height: 16.0),
-            const Text(
-              'Please fill in the details of your meal below.',
+            Text(
+              S.of(context).addMealScreenDescription,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40.0),
             DefaultTextFormField(
-              labelText: 'Meal Name',
+              labelText: S.of(context).addMealScreenFieldName,
               onChanged: addMealNotifier.setName,
             ),
             const SizedBox(height: 20.0),
@@ -44,7 +44,7 @@ class AddMealScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 20.0),
             DefaultTextFormField(
-              labelText: 'Calories (kcal)',
+              labelText: S.of(context).addMealScreenFieldKilocalories,
               inputType: TextInputType.number,
               onChanged: addMealNotifier.setCalories,
             ),
@@ -65,7 +65,7 @@ class AddMealScreen extends ConsumerWidget {
                 }
               },
               icon: const Icon(Icons.check),
-              label: const Text('Add Meal'),
+              label: Text(S.of(context).addMealScreenButton),
             ),
             const SizedBox(height: 100.0),
             const CookieAnimation(),
@@ -101,7 +101,7 @@ class MacrosInputFields extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: DefaultTextFormField(
-            labelText: 'Carbs',
+            labelText: S.of(context).titleCarbs,
             inputType: TextInputType.number,
             onChanged: onCarbsChanged,
           ),
@@ -109,7 +109,7 @@ class MacrosInputFields extends StatelessWidget {
         const SizedBox(width: 10.0),
         Expanded(
           child: DefaultTextFormField(
-            labelText: 'Protein',
+            labelText: S.of(context).titleProtein,
             inputType: TextInputType.number,
             onChanged: onProteinChanged,
           ),
@@ -117,7 +117,7 @@ class MacrosInputFields extends StatelessWidget {
         const SizedBox(width: 10.0),
         Expanded(
           child: DefaultTextFormField(
-            labelText: 'Fat',
+            labelText: S.of(context).titleFat,
             inputType: TextInputType.number,
             onChanged: onFatChanged,
           ),

@@ -7,6 +7,7 @@ import '../../../../app_router/app_router.gr.dart';
 import '../../../../common/providers/locale_provider.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../themes/theme_notifier.dart';
+import '../../../l10n/s.dart';
 import '../state_notifiers/daily_info_notifier.dart';
 import '../widgets/caloric_intake_widget.dart';
 import '../widgets/meal_info_widget.dart';
@@ -126,9 +127,9 @@ class __MealsInfoState extends ConsumerState<_MealsInfo> {
     }
 
     if (!state.loading && state.meals.isEmpty) {
-      return const SliverToBoxAdapter(
+      return SliverToBoxAdapter(
         child: Center(
-          child: Text("You dodn't add any meal yet!"),
+          child: Text(S.of(context).emptyMealList),
         ),
       );
     }

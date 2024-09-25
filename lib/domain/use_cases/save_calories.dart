@@ -1,6 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:final_project/domain/use_cases/use_case.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'use_case.dart';
 
 import '../../common/providers/shared_preferences_provider.dart';
 

@@ -3,48 +3,56 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common/widgets/default_text_form_filed.dart';
 import '../../domain/models/meal.dart';
+import '../state_notifiers/search_meal_notifier.dart';
 
 Future<void> showAddDailyMealDialog(BuildContext context) async {
   await showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        insetPadding: const EdgeInsets.all(16.0),
-        content: const _AlertDialogBody(),
+      return const AlertDialog(
+        insetPadding: EdgeInsets.all(16.0),
+        content: _SearchWidget(),
       );
     },
   );
 }
 
-class _AlertDialogBody extends StatelessWidget {
-  const _AlertDialogBody();
+// class _AlertDialogBody extends StatelessWidget {
+//   const _AlertDialogBody();
 
-  @override
-  Widget build(BuildContext context) {
-    return _SearchWidget();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const ;
+//   }
+// }
 
 class _SearchWidget extends ConsumerWidget {
+  const _SearchWidget();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: <Widget>[
-        Padding(
+    final List<Meal> meals = ref.watch(searchMealStateNotifierProvider);
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverPadding(
           padding: const EdgeInsets.all(16.0),
-          child: DefaultTextFormField(
-            labelText: 'Search for a meal:',
-            onChanged: null,
+          sliver: SliverToBoxAdapter(
+            child: DefaultTextFormField(
+              labelText: 'Search for a meal:',
+              onChanged: (String query) {
+                ref
+                    .read(searchMealStateNotifierProvider.notifier)
+                    .searchMeals(query);
+              },
+            ),
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(index.toString()),
-              );
-            },
-            itemCount: 2,
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) => ListTile(
+              title: Text(meals[index].name),
+            ),
           ),
         ),
       ],

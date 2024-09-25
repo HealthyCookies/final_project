@@ -35,13 +35,13 @@ class DailyInfoState with _$DailyInfoState {
 }
 
 class MealsStateNotifier extends StateNotifier<DailyInfoState> {
-  MealsStateNotifier(this.dailyInfoUseCase) : super(DailyInfoState.initial());
+  MealsStateNotifier(this._dailyInfoUseCase) : super(DailyInfoState.initial());
 
-  final UseCase<Future<List<Meal>>, NoParams> dailyInfoUseCase;
+  final UseCase<Future<List<Meal>>, NoParams> _dailyInfoUseCase;
 
   Future<void> refreshInfo() async {
     state = DailyInfoState.loading();
-    final List<Meal> result = await dailyInfoUseCase.execute(NoParams());
+    final List<Meal> result = await _dailyInfoUseCase.execute(NoParams());
     state = DailyInfoState.loaded(result);
   }
 

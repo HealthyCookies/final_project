@@ -1,0 +1,39 @@
+{
+  "mainMenuButton": "Главная",
+  "mainMealsButton": "Блюда",
+  "mealName": "Блюдо {count}",
+  "@pushCount": {
+    "description": "Что это за блюдо",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "mealDescriptionTitle": "Блюдо 1",
+  "@mealDescriptionTitle": {
+    "description": "Что это за блюдо"
+  },
+  "mealDescriptionContent": "Блюдо 2",
+  "@mealDescriptionContent": {
+    "description": "Что это за блюдо"
+  },
+  "caloricIntakeKcal": "ККАЛ ОСТ.",
+  "@caloricIntakeKcal": {
+    "description": "Заголовок внутри круга счетчика калорий"
+  },
+  "mealsListTitle": "Список блюд",
+
+  "addMealScreenDescription": "Введите название блюда, его тип (завтрак, обед, ужин) и калорийность.",
+  "addMealScreenFieldName": "Название",
+  "addMealScreenFieldType": "Тип",
+  "addMealScreenFieldKilocalories": "Калорийность",
+  "titleBreakfast": "Завтрак",
+  "titleLunch": "Обед",
+  "titleDinner": "Ужин",
+
+  "showConfirmDialogSure": "Вы уверены?",
+  "showConfirmDialogCancel": "Отменить",
+  "showConfirmDialogContinue": "Продолжить"
+}

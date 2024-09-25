@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MealInfoWidget extends StatelessWidget {
   const MealInfoWidget({
     super.key,
     required this.index,
     required this.title,
+    required this.localization,
   });
 
   final String title;
   final int index;
+  final AppLocalizations localization;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +32,12 @@ class MealInfoWidget extends StatelessWidget {
                 Radius.circular(15.0),
               ),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Meal 1'),
-                  Text('Meal 2'),
+                  Text(localization.mealDescriptionTitle),
+                  Text(localization.mealDescriptionContent),
                 ],
               ),
             ),

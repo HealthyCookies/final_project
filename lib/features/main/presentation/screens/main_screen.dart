@@ -4,8 +4,10 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app_router/app_router.gr.dart';
+import '../../../../common/providers/locale_provider.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../themes/theme_notifier.dart';
+import '../../../l10n/s.dart';
 import '../widgets/caloric_intake_widget.dart';
 import '../widgets/meal_info_widget.dart';
 
@@ -15,6 +17,7 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final Locale currentLocale = ref.watch(localeProvider);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -30,6 +33,18 @@ class MainScreen extends ConsumerWidget {
             ),
             actions: <Widget>[
               IconButton(
+                icon: Text(
+                  currentLocale.languageCode.toUpperCase(),
+                ),
+                onPressed: () {
+                  if (currentLocale.languageCode == 'en') {
+                    ref.read(localeProvider.notifier).state = const Locale('ru');
+                  } else {
+                    ref.read(localeProvider.notifier).state = const Locale('en');
+                  }
+                },
+              ),
+              IconButton(
                 icon: Icon(
                   ref.watch(themeProvider) == ThemeMode.dark
                       ? Icons.wb_sunny
@@ -39,9 +54,15 @@ class MainScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const SliverToBoxAdapter(
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 16.0),
+            sliver: SliverToBoxAdapter(
               child: CaloricIntakeWidget(
-                  goalCalories: 1800, currentCalories: 1300)),
+                goalCalories: 1800,
+                currentCalories: 1300,
+              ),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -51,8 +72,9 @@ class MainScreen extends ConsumerWidget {
                     vertical: 8.0,
                   ),
                   child: MealInfoWidget(
-                    title: 'Meal $index',
+                    title: S.of(context).mealName(index),
                     index: index,
+                    localization: S.of(context),
                   ),
                 );
               },

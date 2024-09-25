@@ -18,7 +18,6 @@ class AllMealsScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           DefaultSliverAppBar(title: Text(S.of(context).mealsListTitle)),
-          // Insert SliverToBoxAdapter with TextFormField here
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

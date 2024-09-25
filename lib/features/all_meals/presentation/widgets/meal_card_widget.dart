@@ -14,6 +14,8 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasMacros = totalMacros > 0;
+
     return Card(
       elevation: 4,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -36,73 +38,66 @@ class MealCard extends StatelessWidget {
                       const Icon(Icons.local_fire_department,
                           color: Colors.orange, size: 20),
                       const SizedBox(width: 4),
-                      Text(S.of(context).postfixCalories(meal.calories.toStringAsFixed(0))),
+                      Text(S
+                          .of(context)
+                          .postfixCalories(meal.calories.toStringAsFixed(0))),
                     ],
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              Row(
-                children: <Widget>[
-                  CustomPaint(
-                    size: const Size(100, 100),
-                    painter: MacroPiePainter(
-                      carbs: meal.carbs,
-                      protein: meal.protein,
-                      fat: meal.fat,
+              if (hasMacros) ...[
+                Row(
+                  children: <Widget>[
+                    CustomPaint(
+                      size: const Size(100, 100),
+                      painter: MacroPiePainter(
+                        carbs: meal.carbs,
+                        protein: meal.protein,
+                        fat: meal.fat,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _MacroRow(
-                          color: Colors.blue,
-                          label: S.of(context).titleCarbs,
-                          amount: meal.carbs,
-                          percentage: (meal.carbs / totalMacros * 100)
-                              .toStringAsFixed(1),
-                        ),
-                        const SizedBox(height: 8),
-                        _MacroRow(
-                          color: Colors.red,
-                          label: S.of(context).titleProtein,
-                          amount: meal.protein,
-                          percentage: (meal.protein / totalMacros * 100)
-                              .toStringAsFixed(1),
-                        ),
-                        const SizedBox(height: 8),
-                        _MacroRow(
-                          color: Colors.green,
-                          label: S.of(context).titleFat,
-                          amount: meal.fat,
-                          percentage:
-                              (meal.fat / totalMacros * 100).toStringAsFixed(1),
-                        ),
-                      ],
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _MacroRow(
+                            color: Colors.blue,
+                            label: S.of(context).titleCarbs,
+                            amount: meal.carbs,
+                            percentage: totalMacros > 0
+                                ? (meal.carbs / totalMacros * 100)
+                                .toStringAsFixed(1)
+                                : '0.0',
+                          ),
+                          const SizedBox(height: 8),
+                          _MacroRow(
+                            color: Colors.red,
+                            label: S.of(context).titleProtein,
+                            amount: meal.protein,
+                            percentage: totalMacros > 0
+                                ? (meal.protein / totalMacros * 100)
+                                .toStringAsFixed(1)
+                                : '0.0',
+                          ),
+                          const SizedBox(height: 8),
+                          _MacroRow(
+                            color: Colors.green,
+                            label: S.of(context).titleFat,
+                            amount: meal.fat,
+                            percentage: totalMacros > 0
+                                ? (meal.fat / totalMacros * 100)
+                                .toStringAsFixed(1)
+                                : '0.0',
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Foods:'),
-              ),
-              const SizedBox(height: 8),
-              ...meal.foods.entries.map(
-                (final MapEntry<String, double> entry) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(entry.key),
-                      Text('${entry.value.toStringAsFixed(1)}g'),
-                    ],
-                  ),
+                  ],
                 ),
-              ),
+                const SizedBox(height: 16),
+              ],
             ],
           ),
         ),
@@ -110,6 +105,7 @@ class MealCard extends StatelessWidget {
     );
   }
 }
+
 
 class _MacroRow extends StatelessWidget {
   const _MacroRow({

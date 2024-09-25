@@ -35,7 +35,6 @@ class AllMealsScreen extends ConsumerWidget {
                   contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 ),
                 onChanged: (String value) {
-                  // Call loadMeals method from MealsStateNotifier
                   ref
                       .read(mealsListStateNotifierProvider.notifier)
                       .loadMeals(LoadMealsParams(name: value));

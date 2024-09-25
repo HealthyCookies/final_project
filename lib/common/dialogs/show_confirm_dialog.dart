@@ -8,6 +8,7 @@ Future<bool> showConfirmDialog(BuildContext context) async {
   final String confirmText = S.of(context).showConfirmDialogContinue;
   const String bodyText = '';
   bool agreed = false;
+  final Color textColor = Theme.of(context).textTheme.bodyLarge!.color!;
   await showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -16,14 +17,14 @@ Future<bool> showConfirmDialog(BuildContext context) async {
       actions: <Widget>[
         TextButton(
           onPressed: context.maybePop,
-          child: Text(denyText),
+          child: Text(denyText, style: TextStyle(color: textColor)),
         ),
         TextButton(
           onPressed: () {
             agreed = true;
             context.maybePop();
           },
-          child: Text(confirmText),
+          child: Text(confirmText, style: TextStyle(color: textColor)),
         ),
       ],
     ),

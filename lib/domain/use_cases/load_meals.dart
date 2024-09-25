@@ -27,6 +27,7 @@ class LoadMeals implements UseCase<Future<List<Meal>>, LoadMealsParams> {
     final List<Meal> result = await mealDbService.getData(
       params.limit,
       params.offset,
+      name: params.name,
     );
 
     return result;

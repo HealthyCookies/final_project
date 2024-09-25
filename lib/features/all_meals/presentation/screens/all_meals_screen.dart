@@ -18,12 +18,36 @@ class AllMealsScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           DefaultSliverAppBar(title: Text(S.of(context).mealsListTitle)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: S.of(context).searchMealsLabel,
+                  hintText: S.of(context).searchMealsHint,
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  filled: true,
+                  fillColor: Theme.of(context).cardColor,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                ),
+                onChanged: (String value) {
+                  ref
+                      .read(mealsListStateNotifierProvider.notifier)
+                      .loadMeals(LoadMealsParams(name: value));
+                },
+              ),
+            ),
+          ),
           const _MealsList(),
         ],
       ),
     );
   }
 }
+
 
 class _MealsList extends ConsumerStatefulWidget {
   const _MealsList();

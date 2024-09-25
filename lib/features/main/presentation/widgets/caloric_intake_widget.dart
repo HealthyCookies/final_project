@@ -2,12 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../themes/themes.dart';
 import '../../../l10n/s.dart';
 
 class CaloricIntakePainter extends CustomPainter {
   CaloricIntakePainter({
     required this.progress,
     required this.remainingCalories,
+    required this.textColor,
     required this.localization,
     this.progressColor = Colors.green,
     this.backgroundColor = Colors.grey,
@@ -24,6 +27,7 @@ class CaloricIntakePainter extends CustomPainter {
   final double strokeWidth;
   final TextStyle? textStyleCalories;
   final TextStyle? textStyleLabel;
+  final Color textColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -32,6 +36,7 @@ class CaloricIntakePainter extends CustomPainter {
 
     final Paint backgroundPaint = Paint()
       ..color = backgroundColor.withOpacity(0.3)
+      ..color = backgroundColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
@@ -55,17 +60,17 @@ class CaloricIntakePainter extends CustomPainter {
     );
 
     final TextStyle caloriesStyle = textStyleCalories ??
-        const TextStyle(
+        TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.w600,
-          color: Colors.black,
+          color: textColor,
         );
 
     final TextStyle labelStyle = textStyleLabel ??
-        const TextStyle(
+        TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w500,
-          color: Colors.black54,
+          color: textColor,
         );
 
     final TextSpan caloriesText = TextSpan(
@@ -118,7 +123,8 @@ class CaloricIntakePainter extends CustomPainter {
         oldDelegate.backgroundColor != backgroundColor ||
         oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.textStyleCalories != textStyleCalories ||
-        oldDelegate.textStyleLabel != textStyleLabel;
+        oldDelegate.textStyleLabel != textStyleLabel ||
+        oldDelegate.textColor != textColor;
   }
 }
 
@@ -150,6 +156,11 @@ class CaloricIntakeWidget extends StatelessWidget {
     (goalCalories - currentCalories).clamp(0, goalCalories);
     final double targetProgress = currentCalories / goalCalories;
 
+    final ThemeData theme = Theme.of(context);
+    final Color progressColor = theme.appBarTheme.backgroundColor!;
+    final Color backgroundColor = theme.colorScheme.onPrimaryContainer;
+    final Color textColor = theme.textTheme.bodyLarge!.color!;
+
     return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 800),
       curve: Curves.easeOutCubic,
@@ -170,6 +181,7 @@ class CaloricIntakeWidget extends StatelessWidget {
               strokeWidth: strokeWidth,
               textStyleCalories: textStyleCalories,
               textStyleLabel: textStyleLabel,
+              textColor: textColor,
             ),
           ),
         );

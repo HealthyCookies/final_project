@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../themes/themes.dart';
+import '../../../l10n/s.dart';
 import '../../domain/models/meal.dart';
 
 class MealInfoWidget extends StatelessWidget {
@@ -9,6 +11,8 @@ class MealInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Theme.of(context).textTheme.bodyLarge!.color!;
+
     return Card(
       margin: const EdgeInsets.all(8.0),
       elevation: 2,
@@ -18,16 +22,19 @@ class MealInfoWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Meal Name
             Text(meal.name),
             const SizedBox(height: 8.0),
-            Text('${meal.calories.toStringAsFixed(0)} kcal'),
-            const Divider(height: 20.0, thickness: 1.0),
+            // Total Calories
+            Text(S.of(context).postfixCalories(meal.calories.toStringAsFixed(0))),
+            Divider(height: 20.0, thickness: 1.0, color: textColor),
+            // Macronutrients
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _InfoWidget('Carbs', meal.carbs, Colors.blue),
-                _InfoWidget('Protein', meal.protein, Colors.green),
-                _InfoWidget('Fat', meal.fat, Colors.orange),
+                _InfoWidget(S.of(context).titleCarbs, meal.carbs, Colors.blue, textColor),
+                _InfoWidget(S.of(context).titleProtein, meal.protein, Colors.green, textColor),
+                _InfoWidget(S.of(context).titleFat, meal.fat, Colors.orange, textColor),
               ],
             ),
           ],
@@ -42,18 +49,20 @@ class _InfoWidget extends StatelessWidget {
       this.label,
       this.value,
       this.color,
+      this.textColor
       );
 
   final String label;
   final double value;
   final Color color;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Text(
-          '${value.toStringAsFixed(1)}g',
+          S.of(context).postfixGramms(value.toStringAsFixed(1)),
           style: TextStyle(
             fontSize: 16.0,
             color: color,
@@ -62,9 +71,9 @@ class _InfoWidget extends StatelessWidget {
         ),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14.0,
-            color: Colors.black54,
+            color: textColor,
           ),
         ),
       ],

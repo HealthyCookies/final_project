@@ -6,6 +6,7 @@ import '../../../../common/dialogs/show_confirm_dialog.dart';
 import '../../../../common/widgets/default_text_form_filed.dart';
 import '../../../l10n/s.dart';
 import '../state_notifiers/add_meal_notifier.dart';
+import '../widgets/cookie_animation_widget.dart';
 
 @RoutePage()
 class AddMealScreen extends ConsumerWidget {
@@ -66,6 +67,8 @@ class AddMealScreen extends ConsumerWidget {
               icon: const Icon(Icons.check),
               label: const Text('Add Meal'),
             ),
+            const SizedBox(height: 100.0),
+            const CookieAnimation(),
           ],
         ),
       ),
@@ -187,9 +190,9 @@ class _MealTypeDropdownState extends State<MealTypeDropdown> {
       value: selectedMealType,
       items: MealType.values
           .map((MealType type) => DropdownMenuItem<MealType>(
-                value: type,
-                child: Text(type.displayName(context)),
-              ))
+        value: type,
+        child: Text(type.displayName(context)),
+      ))
           .toList(),
       onChanged: (MealType? value) {
         setState(() {

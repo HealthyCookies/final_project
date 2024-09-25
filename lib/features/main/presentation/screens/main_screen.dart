@@ -56,12 +56,23 @@ class MainScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const SliverPadding(
+          SliverPadding(
             padding: EdgeInsets.only(top: 16.0),
             sliver: SliverToBoxAdapter(
-              child: CaloricIntakeWidget(
-                goalCalories: 1800,
-                currentCalories: 1300,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const CaloricIntakeWidget(
+                    goalCalories: 1800,
+                    currentCalories: 1300,
+                  ),
+                  IconButton(
+                    onPressed: () => ref
+                        .read(dailyInfoStateNotifierProvider.notifier)
+                        .editTotalCcal(context),
+                    icon: const Icon(Icons.edit_rounded),
+                  ),
+                ],
               ),
             ),
           ),

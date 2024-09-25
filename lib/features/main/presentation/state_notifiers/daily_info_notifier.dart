@@ -9,6 +9,7 @@ import '../../../../domain/use_cases/use_case.dart';
 import '../../data/mealDbService.dart';
 import '../../domain/models/meal.dart';
 import '../widgets/show_add_daily_meal_dialog.dart';
+import '../widgets/show_ccal_edit_dialog.dart';
 
 part 'daily_info_notifier.freezed.dart';
 
@@ -53,6 +54,16 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
     if (mealToAdd != null) {
       await _updateDailyStatsUseCase.execute(mealToAdd);
       refreshInfo();
+    } else {
+      // show warning
+    }
+  }
+
+  Future<void> editTotalCcal(BuildContext context) async {
+    final int? newTotalCcal = await showCcalEditDialog(context);
+
+    if (newTotalCcal != null) {
+
     } else {
       // show warning
     }

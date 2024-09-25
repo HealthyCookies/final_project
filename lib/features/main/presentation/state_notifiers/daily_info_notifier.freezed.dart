@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DailyInfoState {
   List<Meal> get meals => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  int? get totalCalories => throw _privateConstructorUsedError;
+  int? get todaysCalories => throw _privateConstructorUsedError;
 
   /// Create a copy of DailyInfoState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,11 @@ abstract class $DailyInfoStateCopyWith<$Res> {
           DailyInfoState value, $Res Function(DailyInfoState) then) =
       _$DailyInfoStateCopyWithImpl<$Res, DailyInfoState>;
   @useResult
-  $Res call({List<Meal> meals, bool loading});
+  $Res call(
+      {List<Meal> meals,
+      bool loading,
+      int? totalCalories,
+      int? todaysCalories});
 }
 
 /// @nodoc
@@ -52,6 +58,8 @@ class _$DailyInfoStateCopyWithImpl<$Res, $Val extends DailyInfoState>
   $Res call({
     Object? meals = null,
     Object? loading = null,
+    Object? totalCalories = freezed,
+    Object? todaysCalories = freezed,
   }) {
     return _then(_value.copyWith(
       meals: null == meals
@@ -62,6 +70,14 @@ class _$DailyInfoStateCopyWithImpl<$Res, $Val extends DailyInfoState>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      totalCalories: freezed == totalCalories
+          ? _value.totalCalories
+          : totalCalories // ignore: cast_nullable_to_non_nullable
+              as int?,
+      todaysCalories: freezed == todaysCalories
+          ? _value.todaysCalories
+          : todaysCalories // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -74,7 +90,11 @@ abstract class _$$DailyInfoStateImplCopyWith<$Res>
       __$$DailyInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Meal> meals, bool loading});
+  $Res call(
+      {List<Meal> meals,
+      bool loading,
+      int? totalCalories,
+      int? todaysCalories});
 }
 
 /// @nodoc
@@ -92,6 +112,8 @@ class __$$DailyInfoStateImplCopyWithImpl<$Res>
   $Res call({
     Object? meals = null,
     Object? loading = null,
+    Object? totalCalories = freezed,
+    Object? todaysCalories = freezed,
   }) {
     return _then(_$DailyInfoStateImpl(
       meals: null == meals
@@ -102,6 +124,14 @@ class __$$DailyInfoStateImplCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      totalCalories: freezed == totalCalories
+          ? _value.totalCalories
+          : totalCalories // ignore: cast_nullable_to_non_nullable
+              as int?,
+      todaysCalories: freezed == todaysCalories
+          ? _value.todaysCalories
+          : todaysCalories // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -110,7 +140,10 @@ class __$$DailyInfoStateImplCopyWithImpl<$Res>
 
 class _$DailyInfoStateImpl implements _DailyInfoState {
   const _$DailyInfoStateImpl(
-      {required final List<Meal> meals, required this.loading})
+      {required final List<Meal> meals,
+      required this.loading,
+      this.totalCalories,
+      this.todaysCalories})
       : _meals = meals;
 
   final List<Meal> _meals;
@@ -123,10 +156,14 @@ class _$DailyInfoStateImpl implements _DailyInfoState {
 
   @override
   final bool loading;
+  @override
+  final int? totalCalories;
+  @override
+  final int? todaysCalories;
 
   @override
   String toString() {
-    return 'DailyInfoState(meals: $meals, loading: $loading)';
+    return 'DailyInfoState(meals: $meals, loading: $loading, totalCalories: $totalCalories, todaysCalories: $todaysCalories)';
   }
 
   @override
@@ -135,12 +172,20 @@ class _$DailyInfoStateImpl implements _DailyInfoState {
         (other.runtimeType == runtimeType &&
             other is _$DailyInfoStateImpl &&
             const DeepCollectionEquality().equals(other._meals, _meals) &&
-            (identical(other.loading, loading) || other.loading == loading));
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.totalCalories, totalCalories) ||
+                other.totalCalories == totalCalories) &&
+            (identical(other.todaysCalories, todaysCalories) ||
+                other.todaysCalories == todaysCalories));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_meals), loading);
+      runtimeType,
+      const DeepCollectionEquality().hash(_meals),
+      loading,
+      totalCalories,
+      todaysCalories);
 
   /// Create a copy of DailyInfoState
   /// with the given fields replaced by the non-null parameter values.
@@ -155,12 +200,18 @@ class _$DailyInfoStateImpl implements _DailyInfoState {
 abstract class _DailyInfoState implements DailyInfoState {
   const factory _DailyInfoState(
       {required final List<Meal> meals,
-      required final bool loading}) = _$DailyInfoStateImpl;
+      required final bool loading,
+      final int? totalCalories,
+      final int? todaysCalories}) = _$DailyInfoStateImpl;
 
   @override
   List<Meal> get meals;
   @override
   bool get loading;
+  @override
+  int? get totalCalories;
+  @override
+  int? get todaysCalories;
 
   /// Create a copy of DailyInfoState
   /// with the given fields replaced by the non-null parameter values.

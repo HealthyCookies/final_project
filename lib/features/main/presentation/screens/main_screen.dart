@@ -18,6 +18,8 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Locale currentLocale = ref.watch(localeProvider);
+    final DailyInfoState state = ref.watch(dailyInfoStateNotifierProvider);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -56,13 +58,26 @@ class MainScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const SliverPadding(
-            padding: EdgeInsets.only(top: 16.0),
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 16.0),
             sliver: SliverToBoxAdapter(
-              child: CaloricIntakeWidget(
-                goalCalories: 1800,
-                currentCalories: 1300,
-              ),
+              child: state.loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CaloricIntakeWidget(
+                          goalCalories: state.totalCalories!,
+                          currentCalories: state.todaysCalories!,
+                        ),
+                        IconButton(
+                          onPressed: () => ref
+                              .read(dailyInfoStateNotifierProvider.notifier)
+                              .editTotalCcal(context),
+                          icon: const Icon(Icons.edit_rounded),
+                        ),
+                      ],
+                    ),
             ),
           ),
           const SliverPadding(

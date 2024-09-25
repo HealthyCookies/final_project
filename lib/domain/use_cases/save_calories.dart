@@ -1,5 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../common/providers/shared_preferences_provider.dart';
 import 'use_case.dart';
 
 class SaveCaloriesUseCase implements UseCase<Future<void>, int> {
@@ -12,3 +14,7 @@ class SaveCaloriesUseCase implements UseCase<Future<void>, int> {
     await _prefs.setInt('total_calories', calories);
   }
 }
+
+final saveCaloriesUseCaseProvider = Provider<SaveCaloriesUseCase>(
+  (ref) => SaveCaloriesUseCase(ref.read(sharedPreferencesProvider)),
+);

@@ -18,13 +18,10 @@ class MealInfoWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Meal Name
             Text(meal.name),
             const SizedBox(height: 8.0),
-            // Total Calories
             Text('${meal.calories.toStringAsFixed(0)} kcal'),
             const Divider(height: 20.0, thickness: 1.0),
-            // Macronutrients
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

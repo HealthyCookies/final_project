@@ -8,6 +8,7 @@ import '../features/main/domain/models/activity.dart';
 import '../features/main/domain/models/food.dart';
 import '../features/main/domain/models/ingredient.dart';
 import '../features/main/domain/models/meal.dart';
+import '../features/main/presentation/screens/add_meal_screen.dart';
 
 class FirstLaunchUseCase {
   FirstLaunchUseCase(
@@ -93,6 +94,7 @@ class FirstLaunchUseCase {
         protein: 15.0,
         fat: 8.0,
         foods: <String, double>{'Apple': 100, 'Banana': 50},
+        type: MealType.breakfast,
       ),
       Meal(
         name: 'Chicken breast with broccoli and rice',
@@ -105,6 +107,7 @@ class FirstLaunchUseCase {
           'Broccoli': 100,
           'Rice': 150
         },
+        type: MealType.lunch,
       ),
       Meal(
         name: 'Salmon with spinach and rice',
@@ -113,6 +116,7 @@ class FirstLaunchUseCase {
         protein: 30.0,
         fat: 15.0,
         foods: <String, double>{'Salmon': 200, 'Spinach': 100, 'Rice': 100},
+        type: MealType.lunch,
       ),
       Meal(
         name: 'Snack',
@@ -121,6 +125,7 @@ class FirstLaunchUseCase {
         protein: 10.0,
         fat: 8.0,
         foods: <String, double>{'Yogurt': 150, 'Almonds': 25},
+        type: MealType.dinner,
       ),
       Meal(
         name: 'Banana overnight oats',
@@ -129,6 +134,7 @@ class FirstLaunchUseCase {
         protein: 20.0,
         fat: 15.0,
         foods: <String, double>{'Oats': 100, 'Banana': 50, 'Milk': 70},
+        type: MealType.breakfast,
       ),
       Meal(
         name: 'Omlete',
@@ -137,6 +143,7 @@ class FirstLaunchUseCase {
         protein: 30.0,
         fat: 10.0,
         foods: <String, double>{'Egg': 2, 'Spinach': 50, 'Tomato': 50},
+        type: MealType.breakfast,
       ),
       Meal(
         name: 'Ice cream',
@@ -145,6 +152,7 @@ class FirstLaunchUseCase {
         protein: 5.0,
         fat: 15.0,
         foods: <String, double>{'Ice Cream': 100, 'Chocolate': 50},
+        type: MealType.lunch,
       ),
       Meal(
         name: 'Banana Smoothie',
@@ -153,6 +161,7 @@ class FirstLaunchUseCase {
         protein: 5.0,
         fat: 7.0,
         foods: <String, double>{'Banana': 100, 'Yogurt': 150},
+        type: MealType.breakfast,
       ),
       Meal(
         name: 'Green Salad',
@@ -161,6 +170,7 @@ class FirstLaunchUseCase {
         protein: 10.0,
         fat: 15.0,
         foods: <String, double>{'Olive Oil': 20, 'Spinach': 100, 'Tomato': 50},
+        type: MealType.dinner,
       ),
       Meal(
         name: 'Chicken Wrap',
@@ -173,6 +183,7 @@ class FirstLaunchUseCase {
           'Chicken Breast': 150,
           'Lettuce': 50
         },
+        type: MealType.lunch,
       ),
     ];
 

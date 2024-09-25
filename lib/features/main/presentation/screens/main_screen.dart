@@ -110,14 +110,6 @@ class __MealsInfoState extends ConsumerState<_MealsInfo> {
       );
     }
 
-    if (!state.loading && state.meals.isEmpty) {
-      return const SliverToBoxAdapter(
-        child: Center(
-          child: Text("You dodn't add any meal yet!"),
-        ),
-      );
-    }
-
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {

@@ -1,8 +1,6 @@
 import 'package:final_project/domain/use_cases/use_case.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../common/providers/shared_preferences_provider.dart';
 import '../../features/main/domain/models/meal.dart';
 
 class UpdateDailyStat implements UseCase<Future<void>, Meal> {
@@ -19,7 +17,3 @@ class UpdateDailyStat implements UseCase<Future<void>, Meal> {
     await _prefs.setString(dateKey, value);
   }
 }
-
-final updateDailyStatProvider = Provider<UpdateDailyStat>((ref) {
-  return UpdateDailyStat(ref.read(sharedPreferencesProvider));
-});

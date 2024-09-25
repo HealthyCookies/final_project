@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../../features/main/data/mealDbService.dart';
 import '../../features/main/domain/models/meal.dart';
 import 'use_case.dart';
@@ -30,3 +33,9 @@ class LoadMeals implements UseCase<Future<List<Meal>>, LoadMealsParams> {
     return result;
   }
 }
+
+final Provider<LoadMeals> loadMealsUseCaseProvider =
+    Provider<LoadMeals>((ProviderRef<LoadMeals> ref) {
+  final MealDbService mealDbService = ref.read(mealDbServiceProvider);
+  return LoadMeals(mealDbService);
+});

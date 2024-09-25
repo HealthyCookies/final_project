@@ -41,7 +41,7 @@ class IngredientDbService extends DatabaseService
   }
 
   @override
-  Future<List<Ingredient>> getData(int limit, int offset) async {
+  Future<List<Ingredient>> getData(int limit, int offset, {String? name}) async {
     final db = await super.database;
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,

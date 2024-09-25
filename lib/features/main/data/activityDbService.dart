@@ -56,7 +56,6 @@ class ActivityDbService extends DatabaseService
   }
 
   @override
-
   Future<void> deleteData(List<Activity> data) async {
     final db = await super.database;
     final batch = db.batch();
@@ -71,7 +70,7 @@ class ActivityDbService extends DatabaseService
   }
 
   @override
-  Future<List<Activity>> getData(int limit, int offset) async {
+  Future<List<Activity>> getData(int limit, int offset, {String? name}) async {
     final db = await super.database;
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,

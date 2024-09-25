@@ -1,0 +1,39 @@
+{
+  "mainMenuButton": "Main",
+  "mainMealsButton": "Meals",
+  "mealName": "Meal {count}",
+  "@pushCount": {
+    "description": "What meal is that",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "mealDescriptionTitle": "Meal 1",
+  "@mealDescriptionTitle": {
+    "description": "What meal is that"
+  },
+  "mealDescriptionContent": "Meal 2",
+  "@mealDescriptionContent": {
+    "description": "What meal is that"
+  },
+  "caloricIntakeKcal": "KCAL LEFT",
+  "@caloricIntakeKcal": {
+    "description": "Title inside of the circle calories counter"
+  },
+  "mealsListTitle": "Meals List",
+
+  "addMealScreenDescription": "Input the dish name, its type (Breakfast, Lunch, Dinner) and Calories",
+  "addMealScreenFieldName": "Name",
+  "addMealScreenFieldType": "Type",
+  "addMealScreenFieldKilocalories": "Kilocalories",
+  "titleBreakfast": "Breakfast",
+  "titleLunch": "Lunch",
+  "titleDinner": "Dinner",
+
+  "showConfirmDialogSure": "Are you sure?",
+  "showConfirmDialogCancel": "Cancel",
+  "showConfirmDialogContinue": "Continue"
+}

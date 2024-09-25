@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../common/dialogs/show_confirm_dialog.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../common/widgets/default_text_form_filed.dart';
+import '../../../l10n/s.dart';
 
 @RoutePage()
 class AddMealScreen extends ConsumerWidget {
@@ -37,13 +38,13 @@ class AddMealScreen extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: <Widget>[
-                  const Text(
-                    'Input the dish name, its type (Breakfast, Lunch, Dinner) and Calories',
+                  Text(
+                    S.of(context).addMealScreenDescription,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40.0),
-                  const DefaultTextFormFiled(
-                    labelText: 'Name',
+                  DefaultTextFormFiled(
+                    labelText: S.of(context).addMealScreenFieldName,
                   ),
                   const SizedBox(height: 40.0),
                   MealTypeDropdown(
@@ -53,8 +54,8 @@ class AddMealScreen extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 40.0),
-                  const DefaultTextFormFiled(
-                    labelText: 'Kilocalories',
+                  DefaultTextFormFiled(
+                    labelText: S.of(context).addMealScreenFieldKilocalories,
                     inputType: TextInputType.number,
                   ),
                 ],
@@ -85,14 +86,14 @@ enum MealType {
 }
 
 extension MealTypeExtension on MealType {
-  String get displayName {
+  String displayName(BuildContext context) {
     switch (this) {
       case MealType.breakfast:
-        return 'Breakfast';
+        return S.of(context).titleBreakfast;
       case MealType.lunch:
-        return 'Lunch';
+        return S.of(context).titleLunch;
       case MealType.dinner:
-        return 'Dinner';
+        return S.of(context).titleDinner;
     }
   }
 }
@@ -123,17 +124,17 @@ class _MealTypeDropdownState extends State<MealTypeDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<MealType>(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        labelText: 'Type',
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-        enabledBorder: OutlineInputBorder(
+        labelText: S.of(context).addMealScreenFieldType,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 2.0),
           borderRadius: BorderRadius.all(
             Radius.circular(25.0),
           ),
         ),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(25.0),
           ),
@@ -143,7 +144,7 @@ class _MealTypeDropdownState extends State<MealTypeDropdown> {
       items: MealType.values
           .map((MealType type) => DropdownMenuItem<MealType>(
                 value: type,
-                child: Text(type.displayName),
+                child: Text(type.displayName(context)),
               ))
           .toList(),
       onChanged: (MealType? value) {

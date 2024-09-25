@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../themes/themes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/s.dart';
 
 class CaloricIntakePainter extends CustomPainter {
   CaloricIntakePainter({
@@ -8,10 +10,12 @@ class CaloricIntakePainter extends CustomPainter {
     required this.backgroundColor,
     required this.progressColor,
     required this.textColor,
+    required this.localization,
   });
 
   final double progress;
   final int remainingCalories;
+  final AppLocalizations localization;
   final Color backgroundColor;
   final Color progressColor;
   final Color textColor;
@@ -64,9 +68,9 @@ class CaloricIntakePainter extends CustomPainter {
 
     final TextPainter textPainterKcalLeft = TextPainter(
       text: TextSpan(
-        text: 'KCAL LEFT',
+        text: localization.caloricIntakeKcal,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 15, // Smaller font size for the text
           fontWeight: FontWeight.w500,
           color: textColor,
         ),
@@ -132,6 +136,7 @@ class CaloricIntakeWidget extends StatelessWidget {
           backgroundColor: backgroundColor,
           progressColor: progressColor,
           textColor: textColor,
+          localization: S.of(context),
         ),
       ),
     );

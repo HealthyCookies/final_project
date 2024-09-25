@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../domain/use_cases/load_meals.dart';
 import '../state_notifiers/meals_list_notifier.dart';
+import '../../../l10n/s.dart';
 
 @RoutePage()
 class AllMealsScreen extends ConsumerWidget {
@@ -12,11 +13,11 @@ class AllMealsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
+    return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          DefaultSliverAppBar(title: Text('Meals List')),
-          _MealsList(),
+          DefaultSliverAppBar(title: Text(S.of(context).mealsListTitle)),
+          const _MealsList(),
         ],
       ),
     );

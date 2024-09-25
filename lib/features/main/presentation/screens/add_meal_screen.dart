@@ -1,14 +1,11 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common/dialogs/show_confirm_dialog.dart';
-import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../common/widgets/default_text_form_filed.dart';
 import '../../../l10n/s.dart';
+import '../state_notifiers/add_meal_notifier.dart';
 
 @RoutePage()
 class AddMealScreen extends ConsumerWidget {
@@ -16,65 +13,113 @@ class AddMealScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    MealType? selectedMealType;
+    final AddMealNotifier addMealNotifier = ref.read(addMealStateNotifierProvider.notifier);
 
     return Scaffold(
-      body: CustomScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        slivers: <Widget>[
-          DefaultSliverAppBar(
-            leading: Bounceable(
-              onTap: context.maybePop,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: const Icon(Icons.arrow_back),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    S.of(context).addMealScreenDescription,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 40.0),
-                  DefaultTextFormFiled(
-                    labelText: S.of(context).addMealScreenFieldName,
-                  ),
-                  const SizedBox(height: 40.0),
-                  MealTypeDropdown(
-                    initialType: selectedMealType,
-                    onTypeChanged: (MealType? value) {
-                      selectedMealType = value;
-                    },
-                  ),
-                  const SizedBox(height: 40.0),
-                  DefaultTextFormFiled(
-                    labelText: S.of(context).addMealScreenFieldKilocalories,
-                    inputType: TextInputType.number,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => context.maybePop(),
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: const Text('Add Meal'),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.check),
-        onPressed: () async {
-          if (await showConfirmDialog(context)) {
-            log('Implement saving');
-            if (context.mounted) {
-              context.maybePop();
-            }
-          }
-        },
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 16.0),
+            const Text(
+              'Please fill in the details of your meal below.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40.0),
+            DefaultTextFormField(
+              labelText: 'Meal Name',
+              onChanged: addMealNotifier.setName,
+            ),
+            const SizedBox(height: 20.0),
+            MealTypeDropdown(
+              onTypeChanged: addMealNotifier.setType,
+            ),
+            const SizedBox(height: 20.0),
+            DefaultTextFormField(
+              labelText: 'Calories (kcal)',
+              inputType: TextInputType.number,
+              onChanged: addMealNotifier.setCalories,
+            ),
+            const SizedBox(height: 20.0),
+            MacrosInputFields(
+              onCarbsChanged: addMealNotifier.setCarbs,
+              onProteinChanged: addMealNotifier.setProtein,
+              onFatChanged: addMealNotifier.setFat,
+            ),
+            const SizedBox(height: 40.0),
+            ElevatedButton.icon(
+              onPressed: () async {
+                if (await showConfirmDialog(context)) {
+                  await addMealNotifier.addMeal();
+                  if (context.mounted) {
+                    context.maybePop();
+                  }
+                }
+              },
+              icon: const Icon(Icons.check),
+              label: const Text('Add Meal'),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class MacrosInputFields extends StatelessWidget {
+  const MacrosInputFields({
+    super.key,
+    this.carbs,
+    this.protein,
+    this.fat,
+    required this.onCarbsChanged,
+    required this.onProteinChanged,
+    required this.onFatChanged,
+  });
+
+  final String? carbs;
+  final String? protein;
+  final String? fat;
+  final ValueChanged<String> onCarbsChanged;
+  final ValueChanged<String> onProteinChanged;
+  final ValueChanged<String> onFatChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Expanded(
+          child: DefaultTextFormField(
+            labelText: 'Carbs',
+            inputType: TextInputType.number,
+            onChanged: onCarbsChanged,
+          ),
+        ),
+        const SizedBox(width: 10.0),
+        Expanded(
+          child: DefaultTextFormField(
+            labelText: 'Protein',
+            inputType: TextInputType.number,
+            onChanged: onProteinChanged,
+          ),
+        ),
+        const SizedBox(width: 10.0),
+        Expanded(
+          child: DefaultTextFormField(
+            labelText: 'Fat',
+            inputType: TextInputType.number,
+            onChanged: onFatChanged,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -82,10 +127,8 @@ class AddMealScreen extends ConsumerWidget {
 enum MealType {
   breakfast,
   lunch,
-  dinner,
-}
+  dinner;
 
-extension MealTypeExtension on MealType {
   String displayName(BuildContext context) {
     switch (this) {
       case MealType.breakfast:
@@ -99,16 +142,17 @@ extension MealTypeExtension on MealType {
 }
 
 class MealTypeDropdown extends StatefulWidget {
+  const MealTypeDropdown({
+    super.key,
+    this.initialType,
+    required this.onTypeChanged,
+  });
+
   final MealType? initialType;
   final ValueChanged<MealType?> onTypeChanged;
 
-  const MealTypeDropdown({
-    Key? key,
-    this.initialType,
-    required this.onTypeChanged,
-  }) : super(key: key);
-
   @override
+  // ignore: library_private_types_in_public_api
   _MealTypeDropdownState createState() => _MealTypeDropdownState();
 }
 
@@ -156,4 +200,3 @@ class _MealTypeDropdownState extends State<MealTypeDropdown> {
     );
   }
 }
-

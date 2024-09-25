@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DefaultTextFormFiled extends StatelessWidget {
-  const DefaultTextFormFiled({
+class DefaultTextFormField extends StatelessWidget {
+  const DefaultTextFormField({
     super.key,
     this.controller,
     this.onChanged,

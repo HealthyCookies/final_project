@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/s.dart';
 import '../../../main/domain/models/meal.dart';
 import 'macro_pie_painter.dart';
 
@@ -35,7 +36,7 @@ class MealCard extends StatelessWidget {
                       const Icon(Icons.local_fire_department,
                           color: Colors.orange, size: 20),
                       const SizedBox(width: 4),
-                      Text('${meal.calories.toStringAsFixed(0)} kcal'),
+                      Text(S.of(context).postfixCalories(meal.calories.toStringAsFixed(0))),
                     ],
                   ),
                 ],
@@ -58,7 +59,7 @@ class MealCard extends StatelessWidget {
                       children: [
                         _MacroRow(
                           color: Colors.blue,
-                          label: 'Carbs',
+                          label: S.of(context).titleCarbs,
                           amount: meal.carbs,
                           percentage: (meal.carbs / totalMacros * 100)
                               .toStringAsFixed(1),
@@ -66,7 +67,7 @@ class MealCard extends StatelessWidget {
                         const SizedBox(height: 8),
                         _MacroRow(
                           color: Colors.red,
-                          label: 'Protein',
+                          label: S.of(context).titleProtein,
                           amount: meal.protein,
                           percentage: (meal.protein / totalMacros * 100)
                               .toStringAsFixed(1),
@@ -74,7 +75,7 @@ class MealCard extends StatelessWidget {
                         const SizedBox(height: 8),
                         _MacroRow(
                           color: Colors.green,
-                          label: 'Fat',
+                          label: S.of(context).titleFat,
                           amount: meal.fat,
                           percentage:
                               (meal.fat / totalMacros * 100).toStringAsFixed(1),
@@ -138,7 +139,7 @@ class _MacroRow extends StatelessWidget {
         const SizedBox(width: 8),
         Expanded(
           child: Text(
-            '$label: ${amount.toStringAsFixed(1)}g',
+            '$label: ${S.of(context).postfixGramms(amount.toStringAsFixed(1))}',
           ),
         ),
         Text(

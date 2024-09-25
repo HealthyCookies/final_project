@@ -40,8 +40,8 @@ To set up this project on your local machine, follow these steps:
 
 1. Clone the repository:
     
-    git clone https://github.com/HealthyCookies/final_project.git
-    cd final_project
+    - git clone https://github.com/HealthyCookies/final_project.git
+    - cd final_project
 
 2. For this project You will need to have a Flutter and Dart SDK.
 
@@ -50,11 +50,11 @@ To set up this project on your local machine, follow these steps:
     
 3. Install the necessary dependencies:
 
-    flutter pub get
+    - flutter pub get
     
 5. Start the development server:
     
-    flutter run
+    - flutter run
 
 ## Usage
 
@@ -62,7 +62,7 @@ Once the application is set up, you can start using it in:
 
 1. Using browser
 
-  IDE will open your browser and you can interact with the app inside the browser.
+   IDE will open your browser and you can interact with the app inside the browser.
 
 2. Using Android
    

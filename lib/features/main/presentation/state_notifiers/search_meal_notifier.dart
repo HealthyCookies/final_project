@@ -4,8 +4,8 @@ import '../../../../domain/use_cases/load_meals.dart';
 import '../../../../domain/use_cases/use_case.dart';
 import '../../domain/models/meal.dart';
 
-class SearchMealNotifier extends StateNotifier<List<Meal>> {
-  SearchMealNotifier(this._loadMealsUseCase) : super(<Meal>[]);
+class SearchMealNotifier extends StateNotifier<List<Meal>?> {
+  SearchMealNotifier(this._loadMealsUseCase) : super(null);
 
   final UseCase<Future<List<Meal>>, LoadMealsParams> _loadMealsUseCase;
 
@@ -14,9 +14,9 @@ class SearchMealNotifier extends StateNotifier<List<Meal>> {
   }
 }
 
-StateNotifierProvider<SearchMealNotifier, List<Meal>>
+StateNotifierProvider<SearchMealNotifier, List<Meal>?>
     searchMealStateNotifierProvider =
-    StateNotifierProvider<SearchMealNotifier, List<Meal>>(
-  (StateNotifierProviderRef<SearchMealNotifier, List<Meal>> ref) =>
+    StateNotifierProvider<SearchMealNotifier, List<Meal>?>(
+  (StateNotifierProviderRef<SearchMealNotifier, List<Meal>?> ref) =>
       SearchMealNotifier(ref.read(loadMealsUseCaseProvider)),
 );

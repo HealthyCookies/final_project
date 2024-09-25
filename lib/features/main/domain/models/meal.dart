@@ -29,6 +29,28 @@ class Meal {
     );
   }
 
+  Meal copyWith({
+    String? id,
+    String? name,
+    double? calories,
+    double? carbs,
+    double? protein,
+    double? fat,
+    Map<String, double>? foods,
+    MealType? type,
+  }) {
+    return Meal(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      calories: calories ?? this.calories,
+      carbs: carbs ?? this.carbs,
+      protein: protein ?? this.protein,
+      fat: fat ?? this.fat,
+      foods: foods ?? this.foods,
+      type: type ?? this.type,
+    );
+  }
+
   final String id;
   final String name;
   final double calories;

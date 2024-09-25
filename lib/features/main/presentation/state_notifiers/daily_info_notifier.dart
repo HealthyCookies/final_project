@@ -46,7 +46,8 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
   }
 
   Future<void> addDailyInfo(BuildContext context) async {
-    showAddDailyMealDialog(context);
+    final Meal? mealToAdd = await showAddDailyMealDialog(context);
+    print(mealToAdd);
   }
 }
 

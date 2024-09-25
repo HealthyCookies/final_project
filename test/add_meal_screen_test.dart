@@ -19,10 +19,10 @@ void main() {
           findsOneWidget,
         );
 
-        expect(find.byType(DefaultTextFormFiled), findsNWidgets(3));
+        expect(find.byType(DefaultTextFormField), findsNWidgets(3));
 
         final Finder nameField =
-            find.widgetWithText(DefaultTextFormFiled, 'Name');
+            find.widgetWithText(DefaultTextFormField, 'Name');
         expect(nameField, findsOneWidget);
 
         expect(find.byIcon(Icons.arrow_back), findsOneWidget);

@@ -4,7 +4,7 @@ import 'use_case.dart';
 
 class LoadMealsParams {
   const LoadMealsParams({
-    this.limit = 10,
+    this.limit = 100,
     this.offset = 0,
     this.name,
   });

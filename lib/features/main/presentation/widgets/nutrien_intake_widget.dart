@@ -23,7 +23,6 @@ class NutrientIntakePainter extends CustomPainter {
 
     final BorderRadius borderRadius = BorderRadius.circular(14);
 
-    // Draw background
     final RRect rrectBackground = RRect.fromRectAndCorners(
       Rect.fromLTWH(0, 0, size.width, size.height),
       topLeft: borderRadius.topLeft,
@@ -33,10 +32,9 @@ class NutrientIntakePainter extends CustomPainter {
     );
     canvas.drawRRect(rrectBackground, paintBackground);
 
-    // Calculate progress and draw it
     final double progressWidth =
         (currentValue / goalValue).clamp(0.0, 1.0) * size.width;
-    final rrectProgress = RRect.fromRectAndCorners(
+    final RRect rrectProgress = RRect.fromRectAndCorners(
       Rect.fromLTWH(1, 1, progressWidth, size.height - 2),
       topLeft: borderRadius.topLeft,
       topRight: borderRadius.topRight,
@@ -79,7 +77,7 @@ class NutrientIntakeWidget extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         CustomPaint(
-          size: const Size(80, 6.6), // You can adjust the size
+          size: const Size(80, 6.6),
           painter: NutrientIntakePainter(
             currentValue: currentValue,
             goalValue: goalValue,

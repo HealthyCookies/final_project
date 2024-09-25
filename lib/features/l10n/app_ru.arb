@@ -11,6 +11,7 @@
       }
     }
   },
+  "emptyMealList": "Вы ещё не добавили каких либо блюд!",
   "postfixGramms": "{gramms}г",
   "@postfixGramms": {
     "description": "Как много грамм разных нутриентов",
@@ -30,10 +31,11 @@
   },
   "mealsListTitle": "Список блюд",
 
-  "addMealScreenDescription": "Введите название блюда, его тип (завтрак, обед, ужин) и калорийность.",
-  "addMealScreenFieldName": "Название",
+  "addMealScreenDescription": "Пожалуйста, заполните ниже информацию о вашем блюде.",
+  "addMealScreenFieldName": "Имя блюда",
   "addMealScreenFieldType": "Тип",
-  "addMealScreenFieldKilocalories": "Калорийность",
+  "addMealScreenFieldKilocalories": "Калории (ккал)",
+  "addMealScreenButton": "Добавить блюдо",
   "titleBreakfast": "Завтрак",
   "titleLunch": "Обед",
   "titleDinner": "Ужин",

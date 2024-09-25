@@ -10,6 +10,7 @@
       }
     }
   },
+  "emptyMealList": "You didn't add any meal yet!",
   "postfixGramms": "{gramms}g",
   "@postfixGramms": {
     "description": "How many gramms of different nutriens",
@@ -29,10 +30,11 @@
   },
   "mealsListTitle": "Meals List",
 
-  "addMealScreenDescription": "Input the dish name, its type (Breakfast, Lunch, Dinner) and Calories",
-  "addMealScreenFieldName": "Name",
+  "addMealScreenDescription": "Please fill in the details of your meal below.",
+  "addMealScreenFieldName": "Meal Name",
   "addMealScreenFieldType": "Type",
-  "addMealScreenFieldKilocalories": "Kilocalories",
+  "addMealScreenFieldKilocalories": "Calories (kcal)",
+  "addMealScreenButton": "Add Meal",
   "titleBreakfast": "Breakfast",
   "titleLunch": "Lunch",
   "titleDinner": "Dinner",

@@ -11,6 +11,7 @@ analyzer:
     file_names: ignore
     sort_constructors_first: ignore
     use_super_parameters: ignore
+    unused_import: ignore
 
 linter:
   rules:

@@ -7,7 +7,7 @@ import '../../../../app_router/app_router.gr.dart';
 import '../../../../common/providers/locale_provider.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../themes/theme_notifier.dart';
-import '../../../l10n/s.dart';
+import '../state_notifiers/daily_info_notifier.dart';
 import '../widgets/caloric_intake_widget.dart';
 import '../widgets/meal_info_widget.dart';
 
@@ -38,9 +38,11 @@ class MainScreen extends ConsumerWidget {
                 ),
                 onPressed: () {
                   if (currentLocale.languageCode == 'en') {
-                    ref.read(localeProvider.notifier).state = const Locale('ru');
+                    ref.read(localeProvider.notifier).state =
+                    const Locale('ru');
                   } else {
-                    ref.read(localeProvider.notifier).state = const Locale('en');
+                    ref.read(localeProvider.notifier).state =
+                    const Locale('en');
                   }
                 },
               ),
@@ -63,25 +65,54 @@ class MainScreen extends ConsumerWidget {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                  child: MealInfoWidget(
-                    title: S.of(context).mealName(index),
-                    index: index,
-                    localization: S.of(context),
-                  ),
-                );
-              },
-              childCount: 10,
-            ),
-          ),
+          const _MealsInfo(),
         ],
+      ),
+    );
+  }
+}
+
+class _MealsInfo extends ConsumerStatefulWidget {
+  const _MealsInfo();
+
+  @override
+  ConsumerState<_MealsInfo> createState() => __MealsInfoState();
+}
+
+class __MealsInfoState extends ConsumerState<_MealsInfo> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(dailyInfoStateNotifierProvider.notifier).refreshInfo();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final DailyInfoState state = ref.watch(dailyInfoStateNotifierProvider);
+
+    if (state.loading) {
+      return const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
+            child: MealInfoWidget(state.meals[index]),
+          );
+        },
+        childCount: state.meals.length,
       ),
     );
   }

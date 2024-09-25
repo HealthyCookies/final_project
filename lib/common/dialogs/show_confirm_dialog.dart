@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../../features/l10n/s.dart';
-import '../../../../themes/themes.dart';
 
 Future<bool> showConfirmDialog(BuildContext context) async {
   final String title = S.of(context).showConfirmDialogSure;
@@ -9,11 +8,7 @@ Future<bool> showConfirmDialog(BuildContext context) async {
   final String confirmText = S.of(context).showConfirmDialogContinue;
   const String bodyText = '';
   bool agreed = false;
-  final ThemeData theme = Theme.of(context);
-  final bool isDarkMode = theme.brightness == Brightness.dark;
-  final Color textColor = isDarkMode
-      ? AppColors.textColorDark
-      : AppColors.textColorLight;
+  final Color textColor = Theme.of(context).textTheme.bodyLarge!.color!;
   await showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(

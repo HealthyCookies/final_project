@@ -6,6 +6,7 @@ class AppColors {
   static const Color secondaryGreen = Color(0xFF359C52);
   static const Color mainWhite = Color(0xFFFCFDF8);
   static const Color appBarBackgroundLight = Color(0xFF41CD68);
+  static const Color backgroundLoadingBarLight = Color(0xE0E0E0FF);
   static const Color textColorLight = Color(0xFF242424);
 
   // Dark Theme Colors
@@ -13,6 +14,7 @@ class AppColors {
   static const Color secondaryColorDark = Color(0xFF673AB7);
   static const Color scaffoldBackgroundDark = Color(0xFF303030);
   static const Color appBarBackgroundDark = Color(0xFF673AB7);
+  static const Color backgroundLoadingBarDark = Color(0xFF242424);
   static const Color textColorDark = Color(0xFFFCFDF8);
 }
 
@@ -22,9 +24,10 @@ final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: AppColors.mainGreen,
     secondary: AppColors.secondaryGreen,
-    onPrimary: AppColors.textColorLight,
     surface: AppColors.mainWhite,
     onSurface: AppColors.textColorLight,
+    onPrimary: AppColors.textColorLight,
+    onPrimaryContainer: AppColors.backgroundLoadingBarLight,
   ),
   scaffoldBackgroundColor: AppColors.mainWhite,
   appBarTheme: const AppBarTheme(
@@ -42,8 +45,9 @@ final ThemeData darkTheme = ThemeData(
     primary: AppColors.primaryColorDark,
     secondary: AppColors.secondaryColorDark,
     surface: AppColors.scaffoldBackgroundDark,
-    onPrimary: AppColors.textColorDark,
     onSurface: AppColors.textColorDark,
+    onPrimary: AppColors.textColorDark,
+    onPrimaryContainer: AppColors.backgroundLoadingBarDark,
   ),
   scaffoldBackgroundColor: AppColors.scaffoldBackgroundDark,
   appBarTheme: const AppBarTheme(

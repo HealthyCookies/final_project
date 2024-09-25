@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../domain/use_cases/load_meals.dart';
-import '../state_notifiers/meals_list_notifier.dart';
 import '../../../l10n/s.dart';
+import '../state_notifiers/meals_list_notifier.dart';
+import '../widgets/meal_card_widget.dart';
 
 @RoutePage()
 class AllMealsScreen extends ConsumerWidget {
@@ -57,9 +58,7 @@ class __MealsListState extends ConsumerState<_MealsList> {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return SizedBox(
-            child: Text(state.meals[index].name),
-          );
+          return SizedBox(child: MealCard(meal: state.meals[index]));
         },
         childCount: state.meals.length,
       ),

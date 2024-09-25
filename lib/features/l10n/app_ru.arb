@@ -1,24 +1,29 @@
 {
   "mainMenuButton": "Главная",
   "mainMealsButton": "Блюда",
-  "mealName": "Блюдо {count}",
-  "@pushCount": {
-    "description": "Что это за блюдо",
+
+  "postfixCalories": "{calories} ккал",
+  "@postfixCalories": {
+    "description": "Как много калорий в блюде",
     "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "1"
+      "calories": {
+        "type": "String"
       }
     }
   },
-  "mealDescriptionTitle": "Блюдо 1",
-  "@mealDescriptionTitle": {
-    "description": "Что это за блюдо"
+  "postfixGramms": "{gramms}г",
+  "@postfixGramms": {
+    "description": "Как много грамм разных нутриентов",
+    "placeholders": {
+      "gramms": {
+        "type": "String"
+      }
+    }
   },
-  "mealDescriptionContent": "Блюдо 2",
-  "@mealDescriptionContent": {
-    "description": "Что это за блюдо"
-  },
+  "titleCarbs": "Углеводы",
+  "titleProtein": "Белки",
+  "titleFat": "Жиры",
+
   "caloricIntakeKcal": "ККАЛ ОСТ.",
   "@caloricIntakeKcal": {
     "description": "Заголовок внутри круга счетчика калорий"

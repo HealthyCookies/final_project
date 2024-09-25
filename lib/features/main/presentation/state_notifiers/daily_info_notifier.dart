@@ -43,7 +43,7 @@ class DailyInfoState with _$DailyInfoState {
 
   factory DailyInfoState.initial() => const _DailyInfoState(
         meals: <Meal>[],
-        loading: false,
+        loading: true,
       );
 }
 

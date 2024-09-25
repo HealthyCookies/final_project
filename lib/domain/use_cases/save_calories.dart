@@ -1,5 +1,6 @@
-import 'package:final_project/domain/use_cases/use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'use_case.dart';
 
 class SaveCaloriesUseCase implements UseCase<Future<void>, int> {
   final SharedPreferences _prefs;

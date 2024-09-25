@@ -41,13 +41,12 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
   Future<void> refreshInfo() async {
     state = DailyInfoState.loading();
     final List<Meal> result = await dailyInfoUseCase.execute(NoParams());
-    _allMeals = result; // Store all meals for filtering
+    _allMeals = result;
     state = DailyInfoState.loaded(result);
   }
 
   Future<void> loadMeals(String query) async {
     if (_allMeals.isEmpty) {
-      // If meals are not loaded yet, load them
       await refreshInfo();
     }
     final List<Meal> filteredMeals = _allMeals

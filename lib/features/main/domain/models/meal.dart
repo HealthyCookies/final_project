@@ -11,14 +11,6 @@ class Meal {
     this.foods = const <String, double>{},
   }) : id = id ?? _generateId();
 
-  final String id;
-  final String name;
-  final double calories;
-  double carbs;
-  double protein;
-  double fat;
-  final Map<String, double> foods;
-
   factory Meal.fromMap(Map<String, dynamic> map) {
     return Meal(
       id: map['id'] as String,
@@ -30,6 +22,14 @@ class Meal {
       foods: parseMealData(map['foods']),
     );
   }
+
+  final String id;
+  final String name;
+  final double calories;
+  double carbs;
+  double protein;
+  double fat;
+  final Map<String, double> foods;
 
   static String _generateId() {
     const Uuid uuid = Uuid();

@@ -29,11 +29,6 @@ class CaloriesCounter {
   }
 
   /// Adjusts BMR based on the goal (gain, lose, maintain weight).
-  ///
-  /// The method returns the number of calories required daily to meet the goal:
-  /// - For gaining weight, 500 calories are added.
-  /// - For losing weight, 500 calories are subtracted.
-  /// - For maintaining weight, the BMR is returned directly.
   int calculateCalories() {
     final int bmr = calculateBMR();
 

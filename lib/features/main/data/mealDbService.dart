@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
@@ -7,7 +8,7 @@ import '../../../services/database/database_service.dart';
 import '../domain/i_database_service.dart';
 import '../domain/models/meal.dart';
 
-const String _tableName = 'meal_table';
+const String _tableName = 'meal_table_db';
 
 // ignore: always_specify_types
 final mealDbServiceProvider = Provider((_) => MealDbService());
@@ -17,7 +18,7 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
 
   @override
   FutureOr<void> Function(Database database, int version) get onCreate =>
-          (Database database, int version) {
+      (Database database, int version) {
         database.execute('''
           CREATE TABLE IF NOT EXISTS $_tableName(
             id TEXT PRIMARY KEY,
@@ -26,7 +27,8 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
             carbs REAL,
             protein REAL,
             fat REAL,
-            foods TEXT
+            foods TEXT,
+            type TEXT
           )
         ''');
       };
@@ -81,7 +83,15 @@ class MealDbService extends DatabaseService implements IDatabaseService<Meal> {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
-    await batch.commit(noResult: true);
+    try {
+      for (final Meal meal in data) {
+        log('Trying to insert meal: ${meal.name}');
+      }
+      await batch.commit(noResult: true);
+      log('Success');
+    } catch (e) {
+      log('Failed');
+    }
   }
 
   @override

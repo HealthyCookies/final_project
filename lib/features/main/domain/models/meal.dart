@@ -1,10 +1,13 @@
 import 'package:uuid/uuid.dart';
 
+import '../../presentation/screens/add_meal_screen.dart';
+
 class Meal {
   Meal({
     String? id,
     required this.name,
     required this.calories,
+    required this.type,
     this.carbs = 0.0,
     this.protein = 0.0,
     this.fat = 0.0,
@@ -20,6 +23,9 @@ class Meal {
       protein: map['protein'] as double? ?? 0.0,
       fat: map['fat'] as double? ?? 0.0,
       foods: parseMealData(map['foods']),
+      type: MealType.values
+          .where((MealType type) => type.name == map['type'])
+          .first,
     );
   }
 
@@ -29,13 +35,14 @@ class Meal {
   double carbs;
   double protein;
   double fat;
+  final MealType type;
   final Map<String, double> foods;
 
   static String _generateId() {
     const Uuid uuid = Uuid();
     return uuid.v4();
   }
-  
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -45,6 +52,7 @@ class Meal {
       'protein': protein,
       'fat': fat,
       'foods': foods,
+      'type': type.name,
     };
   }
 

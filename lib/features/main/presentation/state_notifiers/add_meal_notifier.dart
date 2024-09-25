@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../domain/use_cases/add_meal.dart';
 import '../../../../domain/use_cases/use_case.dart';
+import '../../../all_meals/presentation/state_notifiers/meals_list_notifier.dart';
 import '../screens/add_meal_screen.dart';
 
 part 'add_meal_notifier.freezed.dart';
@@ -41,9 +42,13 @@ extension AddMealStateX on AddMealState {
 }
 
 class AddMealNotifier extends StateNotifier<AddMealState> {
-  AddMealNotifier(this._addMealUseCase) : super(AddMealState.initial());
+  AddMealNotifier(
+    this._addMealUseCase,
+    this._mealsStateNotifier,
+  ) : super(AddMealState.initial());
 
   final UseCase<Future<void>, AddMealParams> _addMealUseCase;
+  final MealsStateNotifier _mealsStateNotifier;
 
   String _name = '';
   String _calories = '';
@@ -54,7 +59,7 @@ class AddMealNotifier extends StateNotifier<AddMealState> {
 
   void setName(String val) {
     _name = val;
-  } 
+  }
 
   void setCalories(String val) {
     _calories = val;
@@ -87,6 +92,7 @@ class AddMealNotifier extends StateNotifier<AddMealState> {
         protein: double.tryParse(_protein) ?? 0.0,
       );
       await _addMealUseCase.execute(params);
+      _mealsStateNotifier.refresh();
     }
   }
 
@@ -98,7 +104,8 @@ class AddMealNotifier extends StateNotifier<AddMealState> {
       typeNotChoosen: _type == null,
       fatFieldHasError: _fat.isNotEmpty && double.tryParse(_fat) == null,
       carbsFieldHasError: _carbs.isNotEmpty && double.tryParse(_carbs) == null,
-      proteinFieldHasError: _protein.isNotEmpty && double.tryParse(_protein) == null,
+      proteinFieldHasError:
+          _protein.isNotEmpty && double.tryParse(_protein) == null,
     );
 
     if (!newState.isValid) {
@@ -114,5 +121,8 @@ final StateNotifierProvider<AddMealNotifier, AddMealState>
     addMealStateNotifierProvider =
     StateNotifierProvider<AddMealNotifier, AddMealState>(
         (StateNotifierProviderRef<AddMealNotifier, AddMealState> ref) {
-  return AddMealNotifier(ref.watch(addMealUseCaseProvider));
+  return AddMealNotifier(
+    ref.watch(addMealUseCaseProvider),
+    ref.read(mealsListStateNotifierProvider.notifier),
+  );
 });

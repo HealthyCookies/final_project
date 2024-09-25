@@ -7,6 +7,7 @@ import '../../../../app_router/app_router.gr.dart';
 import '../../../../common/providers/locale_provider.dart';
 import '../../../../common/widgets/default_sliver_app_bar.dart';
 import '../../../../themes/theme_notifier.dart';
+import '../../../../themes/themes.dart';
 import '../../../l10n/s.dart';
 import '../state_notifiers/daily_info_notifier.dart';
 import '../widgets/caloric_intake_widget.dart';
@@ -91,7 +92,10 @@ class MainScreen extends ConsumerWidget {
         onPressed: () => ref
             .read(dailyInfoStateNotifierProvider.notifier)
             .addDailyInfo(context),
-        child: const Icon(Icons.add_rounded),
+        child: const Icon(
+          Icons.add_rounded,
+          color: AppColors.mainWhite,
+        ),
       ),
     );
   }

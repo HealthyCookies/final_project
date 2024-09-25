@@ -41,6 +41,10 @@ class MealsStateNotifier extends StateNotifier<MealsListState> {
     final List<Meal> result = await loadMealsUseCase.execute(param);
     state = MealsListState.loaded(result);
   }
+
+  Future<void> refresh() async {
+    await loadMeals(const LoadMealsParams());
+  }
 }
 
 // ignore: always_specify_types

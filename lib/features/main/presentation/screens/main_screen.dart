@@ -39,10 +39,10 @@ class MainScreen extends ConsumerWidget {
                 onPressed: () {
                   if (currentLocale.languageCode == 'en') {
                     ref.read(localeProvider.notifier).state =
-                    const Locale('ru');
+                        const Locale('ru');
                   } else {
                     ref.read(localeProvider.notifier).state =
-                    const Locale('en');
+                        const Locale('en');
                   }
                 },
               ),
@@ -65,8 +65,17 @@ class MainScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const _MealsInfo(),
+          const SliverPadding(
+            padding: EdgeInsets.only(bottom: 100.0),
+            sliver: _MealsInfo(),
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref
+            .read(dailyInfoStateNotifierProvider.notifier)
+            .addDailyInfo(context),
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }
@@ -103,7 +112,7 @@ class __MealsInfoState extends ConsumerState<_MealsInfo> {
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+        (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,

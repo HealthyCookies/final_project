@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -6,6 +7,7 @@ import '../../../../domain/use_cases/load_daily_info.dart';
 import '../../../../domain/use_cases/use_case.dart';
 import '../../data/mealDbService.dart';
 import '../../domain/models/meal.dart';
+import '../widgets/show_add_daily_meal_dialog.dart';
 
 part 'daily_info_notifier.freezed.dart';
 
@@ -41,6 +43,10 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
     state = DailyInfoState.loading();
     final List<Meal> result = await dailyInfoUseCase.execute(NoParams());
     state = DailyInfoState.loaded(result);
+  }
+
+  Future<void> addDailyInfo(BuildContext context) async {
+    showAddDailyMealDialog(context);
   }
 }
 

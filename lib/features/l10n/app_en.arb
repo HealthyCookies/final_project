@@ -39,5 +39,8 @@
 
   "showConfirmDialogSure": "Are you sure?",
   "showConfirmDialogCancel": "Cancel",
-  "showConfirmDialogContinue": "Continue"
+  "showConfirmDialogContinue": "Continue",
+
+  "searchMealsLabel": "Search meals",
+  "searchMealsHint": "Enter title of meal"
 }

@@ -40,5 +40,8 @@
 
   "showConfirmDialogSure": "Вы уверены?",
   "showConfirmDialogCancel": "Отменить",
-  "showConfirmDialogContinue": "Продолжить"
+  "showConfirmDialogContinue": "Продолжить",
+
+  "searchMealsLabel": "Поиск блюд",
+  "searchMealsHint": "Введите название блюда"
 }

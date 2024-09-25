@@ -97,6 +97,23 @@ class MealCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
+                // const Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Text('Foods:'),
+                // ),
+                // const SizedBox(height: 8),
+                // ...meal.foods.entries.map(
+                //   (final MapEntry<String, double> entry) => Padding(
+                //     padding: const EdgeInsets.symmetric(vertical: 2.0),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Text(entry.key),
+                //         Text('${entry.value.toStringAsFixed(1)}g'),
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ],
           ),

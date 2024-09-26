@@ -45,14 +45,27 @@ Future<Meal?> showAddDailyMealDialog(BuildContext context) async {
   return meal?.copyWith(type: type);
 }
 
-class _DialogBody extends ConsumerWidget {
+class _DialogBody extends ConsumerStatefulWidget {
   const _DialogBody(this.onTypeChanged, this.onMealTapped);
 
   final void Function(MealType type) onTypeChanged;
   final void Function(Meal meal) onMealTapped;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_DialogBody> createState() => _DialogBodyState();
+}
+
+class _DialogBodyState extends ConsumerState<_DialogBody> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(searchMealStateNotifierProvider.notifier).searchMeals('');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final List<Meal>? meals = ref.watch(searchMealStateNotifierProvider);
 
     return Column(
@@ -70,7 +83,7 @@ class _DialogBody extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: _MealTypeSelector(onTypeChanged),
+          child: _MealTypeSelector(widget.onTypeChanged),
         ),
         if (meals == null)
           const Center(
@@ -82,7 +95,7 @@ class _DialogBody extends ConsumerWidget {
               itemCount: meals.length,
               itemBuilder: (BuildContext context, int index) => _MealListItem(
                 meal: meals[index],
-                onMealTapped: onMealTapped,
+                onMealTapped: widget.onMealTapped,
               ),
             ),
           ),
@@ -90,6 +103,7 @@ class _DialogBody extends ConsumerWidget {
     );
   }
 }
+
 
 class _MealListItem extends StatelessWidget {
   const _MealListItem({

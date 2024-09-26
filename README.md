@@ -58,16 +58,10 @@ To set up this project on your local machine, follow these steps:
 
 ## Usage
 
-Once the application is set up, you can start using it in:
-
-1. Using browser
-
-   IDE will open your browser and you can interact with the app inside the browser.
-
-2. Using Android
+Once the application is set up, you can start using it via Android:
    
    flutter build apk --release
-   This command will build aok file that you can install and use on your android
+   This command will build apk file that you can install and use on your android
 
 ## Features
 

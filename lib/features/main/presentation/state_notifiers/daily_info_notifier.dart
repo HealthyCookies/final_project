@@ -65,7 +65,7 @@ class MealsStateNotifier extends StateNotifier<DailyInfoState> {
     final List<Meal> result = await _dailyInfoUseCase.execute(NoParams());
     final int totalCalories = _loadCaloriesUseCase.execute(NoParams());
     int todaysCalories = 0;
-    for (Meal meal in result) {
+    for (final Meal meal in result) {
       todaysCalories += meal.calories.round();
     }
     state = DailyInfoState.loaded(result, totalCalories, todaysCalories);

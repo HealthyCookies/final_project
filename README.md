@@ -76,3 +76,6 @@ Once the application is set up, you can start using it in:
 - Light/Dart themes: Supporting both light and dark themes to cater to different user preferences. 
 - Localization: Implemented localization for Russian (RU) and English (ENG) makes the app more accessible to a broader audience. 
 - Menu List: Nutrient's information about several most regular meals.
+
+## Presentation
+https://www.canva.com/design/DAGRkMhIQiI/OjFF81rcO9lVfRTZd6eGgQ/edit
